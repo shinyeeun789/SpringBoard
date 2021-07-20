@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.game.web">
+	<logger name="com.inhatc.cs">
 		<level value="info" />
 	</logger>
 	
