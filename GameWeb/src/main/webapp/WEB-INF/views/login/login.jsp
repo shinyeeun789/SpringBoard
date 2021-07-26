@@ -66,6 +66,9 @@
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> facebook 계정으로 로그인
                                         </a>
+                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                            <i class="fab fa-facebook-f fa-fw"></i> 카카오 로그인
+                                        </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
