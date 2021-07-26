@@ -27,11 +27,11 @@
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
 	<error-page>
 		<error-code>404</error-code>
-		<location>/error/error404</location>
+		<location>/error/error404.do</location>
 	</error-page>
 </web-app>
