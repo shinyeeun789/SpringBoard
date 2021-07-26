@@ -12,15 +12,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public void login(Model model) throws Exception {
-		logger.info("/login/login");
+		System.out.println("/login/login");
 		
 	}
 	
-	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
+	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
 	public void signUp(Model model) throws Exception {
-		
-		// return "/login/signUp";
+		System.out.println("/login/signUp");
+	}
+	
+	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
+	public String idCheck(Model model, String userID) throws Exception {
+		System.out.println(userID);
+		return "/login/signUp";
 	}
 }

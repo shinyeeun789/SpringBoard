@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/error/*")
 public class ErrorController {
 	
-	@RequestMapping(value = "/error404", method = RequestMethod.GET)
+	@RequestMapping(value = "/error404.do", method = RequestMethod.GET)
 	public void error404(HttpServletRequest request) throws Exception {
-		System.out.println("[/error/error404] 404 error Î∞úÏÉù");
+		System.out.println("[/error/error404.do] 404 error πﬂª˝");
 	}
 
 }

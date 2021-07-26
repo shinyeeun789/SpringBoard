@@ -20,7 +20,43 @@
 
     <!-- Custom styles for this template-->
     <link href="../../resources/css/sb-admin-2.min.css" rel="stylesheet">
-
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+	
+	<script type=text/javascript>
+		$(document).ready(function(){
+			$("#btnIdCheck").click(userIDCheck);
+			$("#btnSignUp").click(userSignUp);
+			$("#userName").focus();
+		});
+		
+		userIDCheck = function() {
+			console.log('아이디 체크');
+		}
+		
+		userSignUp = function() {
+			var frm = document.signUp_frm;
+			var userName = frm.userName.value;
+			var userID = frm.userID.value;
+			var userPW = frm.userPW.value;
+			var userRepeatPW = frm.userRepeatPW.value;
+			
+			if(chkInputSpace(userID) > -1) {
+				alert('아이디에 공백문자를 넣을 수 없습니다. 확인해주세요.');
+			} else if(chkInputSpace(userPW) > -1) {
+				alert('비밀번호에 공백문자를 넣을 수 없습니다. 확인해주세요.');
+			} else if(userName.length < 1 || userID.length < 1 || userPW.length < 1 || userRepeatPW.length < 1) {
+				alert('입력되지 않은 항목이 있습니다.');
+			} else if(userPW != userRepeatPW) {
+				alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+			}
+		}
+		
+		chkInputSpace = function(text) {
+			var pattern = /\s/;
+			return text.search(pattern);
+		}
+	</script>
 </head>
 
 <body class="bg-gradient-primary">
@@ -37,28 +73,32 @@
                         	<div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
+                            <form method="post" class="user" name="signUp_frm" onsubmit="return false">
                                	<div class="form-group">
-                                    <input type="userName" class="form-control form-control-user" id="exampleInputEmail"
+                                    <input type="text" class="form-control form-control-user" id="userName"
                                         placeholder="닉네임">
                                 </div>
-                                <div class="form-group">
-                                    <input type="userID" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="아이디">
-                                </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="비밀번호">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="passwordCheck" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="비밀번호 확인">
-                                    </div>
+                                	<div class="col-sm-8 mb-3 mb-sm-0">
+                                		<input type="text" class="form-control form-control-user" id="userID"
+                                        placeholder="아이디">
+                                	</div>
+                                	<div class="col-sm-4">
+                                		<a class="btn btn-secondary btn-user btn-block" id="btnIdCheck"> 중복 확인 </a>
+                                	</div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    회원가입
-                                </a>
+                                <div class="form-group">
+                                	<input type="password" class="form-control form-control-user"
+                                            id="userPW" placeholder="비밀번호">
+                                </div>
+                                <div class="form-group">
+                                	<input type="password" class="form-control form-control-user"
+                                            id="userRepeatPW" placeholder="비밀번호 확인">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block" id="btnSignUp">
+                                	회원가입
+                                </button>
+                                
                                 <hr>
                                 <a href="index.html" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Google 계정으로 회원가입
@@ -69,7 +109,7 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="/login/login"> 이미 계정이 있나요? </a>
+                                <a class="small" href="/login/login.do"> 이미 계정이 있나요? </a>
                             </div>
                         </div>
                     </div>

@@ -69,7 +69,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="/login/signUp"> 회원가입 </a>
+                                        <a class="small" href="/login/signUp.do"> 회원가입 </a>
                                     </div>
                                 </div>
                             </div>
@@ -84,14 +84,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../resources/vendor/jquery/jquery.min.js"></script>
+    <script src="../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../../resources/js/sb-admin-2.min.js"></script>
 
 </body>
 

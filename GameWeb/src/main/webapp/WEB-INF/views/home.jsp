@@ -34,7 +34,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/main.do">
                 <div class="sidebar-brand-icon rotate-n-15">
                 	<i class="fas fa-gamepad"></i>
                 </div>
@@ -46,7 +46,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="/main.do">
                     <i class="fas fa-home"></i>
                     <span> HOME </span></a>
             </li>
@@ -56,7 +56,7 @@
             
             <!-- Nav Item - 로그인 -->
             <li class="nav-item">
-                <a class="nav-link" href="/login/login">
+                <a class="nav-link" href="/login/login.do">
                     <i class="fas fa-fw fa-user"></i>
                     <span> LOGIN </span></a>
             </li>
@@ -159,7 +159,7 @@
                                     src="../resources/img/undraw_posting_photo.svg" alt="...">
                             </div>
                             <p> 게임에 참여하려면 로그인 해주세요. </p>
-                            <a rel="nofollow" href="/login/login"> 로그인 하러 가기 &rarr;</a>
+                            <a rel="nofollow" href="/login/login.do"> 로그인 하기 &rarr;</a>
                         </div>
                     </div>
                     
@@ -177,8 +177,8 @@
                             <p> 바둑판에 두 사람이 번갈아 돌을 놓아 가로나 세로, 대각선으로 다섯 개의 연속된 돌을 놓으면 이기는 놀이 </p><br>
                             <h5> 기본 규칙 </h5>
                             <ul>
-                            	<li> 오목은 바둑판과 알을 이용하여 진행하는 게임으로 흑돌과 백돌 중 먼저 5개의 돌을 일렬로 세우는 사용자가 승리 </li>
-                            	<li> 육목 이상을 두어도 승패와는 전혀 상관이 없음 </li>
+                            	<li> 오목은 바둑판과 알을 이용하여 진행하는 게임으로 흑돌과 백돌 중 먼저 5개의 돌을 일렬로 세우는 사용자가 승리합니다. </li>
+                            	<li> 육목 이상을 두어도 승패와는 전혀 상관이 없습니다. </li>
                             </ul>
                         </div>
                     </div>

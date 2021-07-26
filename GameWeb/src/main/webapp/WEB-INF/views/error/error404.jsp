@@ -44,7 +44,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="/main.do">
                     <i class="fas fa-home"></i>
                     <span> HOME </span></a>
             </li>
@@ -54,7 +54,7 @@
             
             <!-- Nav Item - 로그인 -->
             <li class="nav-item">
-                <a class="nav-link" href="/login/login">
+                <a class="nav-link" href="/login/login.do">
                     <i class="fas fa-fw fa-user"></i>
                     <span> LOGIN </span></a>
             </li>
@@ -152,7 +152,7 @@
                     <div class="text-center">
                         <div class="error mx-auto" data-text="404">404</div>
                         <p class="lead text-gray-800 mb-5">Page Not Found</p>
-                        <a href="/">&larr; 홈 화면으로 돌아가기</a>
+                        <a href="/main.do">&larr; 홈 화면으로 돌아가기</a>
                     </div>
 
                 </div>
@@ -188,12 +188,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> 로그아웃 </h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body"> 정말 로그아웃하시겠습니까? </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="login.html">Logout</a>
