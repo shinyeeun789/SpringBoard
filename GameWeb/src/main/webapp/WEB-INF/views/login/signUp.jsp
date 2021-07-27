@@ -36,25 +36,47 @@
 		
 		userSignUp = function() {
 			var frm = document.signUp_frm;
-			var userName = frm.userName.value;
-			var userID = frm.userID.value;
-			var userPW = frm.userPW.value;
-			var userRepeatPW = frm.userRepeatPW.value;
+			var userName = frm.userName;
+			var userID = frm.userID;
+			var userPW = frm.userPW;
+			var userRepeatPW = frm.userRepeatPW;
 			
-			if(chkInputSpace(userID) > -1) {
-				alert('아이디에 공백문자를 넣을 수 없습니다. 확인해주세요.');
-			} else if(chkInputSpace(userPW) > -1) {
-				alert('비밀번호에 공백문자를 넣을 수 없습니다. 확인해주세요.');
-			} else if(userName.length < 1 || userID.length < 1 || userPW.length < 1 || userRepeatPW.length < 1) {
-				alert('입력되지 않은 항목이 있습니다.');
-			} else if(userPW != userRepeatPW) {
-				alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+			if(chkInputSpace(userID.value) > -1) {
+				$("#spanMSG").css("font-size", "12px").html("아이디에 공백문자를 넣을 수 없습니다.");
+				userID.focus();
+			} else if(chkInputSpace(userPW.value) > -1) {
+				$("#spanMSG").css("font-size", "12px").html("비밀번호에 공백문자를 넣을 수 없습니다.");
+				userPW.focus();
+			} else if(userName.value.length < 1 || userID.value.length < 1 || userPW.value.length < 1 || userRepeatPW.value.length < 1) {
+				$("#spanMSG").css("font-size", "12px").html("입력되지 않은 항목이 있습니다.");
+			} else if(userPW.value != userRepeatPW.value) {
+				$("#spanMSG").css("font-size", "12px").html("비밀번호와 비밀번호 확인이 일치하지 않습니다");
+				userPW.focus();
+			} else if(checkPassword(userPW)) {
+				alert('회원가입 진행!!');
 			}
 		}
 		
 		chkInputSpace = function(text) {
 			var pattern = /\s/;
 			return text.search(pattern);
+		}
+		
+		checkPassword = function(pw) {
+			if(!/^[a-zA-Z0-9]{8,20}$/.test(pw.value)) {
+				$("#spanMSG").css("font-size", "12px").html("비밀번호는 숫자와 영문자 조합으로 8~20자리로 설정할 수 있습니다.");
+				userPW.focus();
+				return false;
+			}
+			
+			var chk_num = pw.value.search(/[0-9]/g);
+			var chk_eng = pw.value.search(/[a-z]/ig);
+			if(chk_num < 0 || chk_eng < 0) {
+				$("#spanMSG").css("font-size", "12px").html("비밀번호는 숫자와 영문자를 혼용하여 사용하여야 합니다.");
+				userPW.focus();
+				return false;
+			}
+			return true;
 		}
 	</script>
 </head>
@@ -94,6 +116,9 @@
                                 <div class="form-group">
                                 	<input type="password" class="form-control form-control-user"
                                             id="userRepeatPW" placeholder="비밀번호 확인">
+                                </div>
+                                <div class="form-group text-center">
+                                	<span class="text-danger" id="spanMSG"></span>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block" id="btnSignUp">
                                 	회원가입

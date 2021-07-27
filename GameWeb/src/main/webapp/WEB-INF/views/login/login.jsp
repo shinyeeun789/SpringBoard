@@ -62,10 +62,10 @@
                                         <hr>
                                         <hr>
 		                                <a href="index.html" class="btn btn-light btn-user btn-block">
-		                                    <b>N</b> 네이버 계정으로 회원가입
+		                                    <b>N</b> 네이버 계정으로 로그인
 		                                </a>
 		                                <a href="index.html" class="btn btn-warning btn-user btn-block">
-		                                    <b>K</b> 카카오 계정으로 회원가입
+		                                    <b>K</b> 카카오 계정으로 로그인
 		                                </a>
                                     </form>
                                     <hr>
