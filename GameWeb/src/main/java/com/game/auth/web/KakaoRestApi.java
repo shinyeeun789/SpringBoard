@@ -1,4 +1,4 @@
-package com.game.login.web;
+package com.game.auth.web;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -7,12 +7,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.stereotype.Controller;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.apache.tomcat.util.bcel.classfile.ElementValuePair;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -22,24 +16,24 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Controller
-public class KakaoController  {
-
+public class KakaoRestApi {
 	private final static String K_CLIENT_ID = "db1cd9e8343b76d2a21deae2ce17abbd";
-	private final static String K_REDIRECT_URI="http://localhost:8081/main.do";
+	private final static String K_REDIRECT_URI="http://localhost:8081/kakaoOauth.do";
 	
 	/** authorization Url get
 	 * 
 	 * @param session
 	 * @return
 	 */
-	public String getAuthorizzationUrl(HttpSession session) {
+	public String getAuthorizationUrl(HttpSession session) {
 		
 		String kakoUrl = "https://kauth.kako.com/oauth/authorize?"
 				+"cliendt_id=" + K_CLIENT_ID + "&redirect_uri=" 
 				+ K_REDIRECT_URI + "&response_type=code";
-		return null;
+		return kakoUrl;
 	}
 	
 	
@@ -117,4 +111,5 @@ public class KakaoController  {
 		
 		return returnNode;
 	}
+
 }
