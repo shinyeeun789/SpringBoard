@@ -31,10 +31,14 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Inject
+<<<<<<< HEAD
 	private LoginService service;
 	
 	@Inject
 	BCryptPasswordEncoder pwdEncoder;		// æœ»£»≠ ±‚¥…
+=======
+	BCryptPasswordEncoder pwdEncoder;		// ÏïîÌò∏Ìôî Í∏∞Îä•
+>>>>>>> d3a74ac3c5ff4bfe38648e6848e2725c6a49b508
 	
 	private KakaoRestApi kakao_rest_api = new KakaoRestApi();
 	
@@ -43,7 +47,7 @@ public class LoginController {
 	public void login(Model model, HttpSession session) throws Exception {
 		
 		String KakaoUrl = kakao_rest_api.getAuthorizationUrl(session);
-		//ª˝º∫«— ¿Œ¡ı URL¿ª View∑Œ ¿¸¥ﬁ
+		//ÏÉùÏÑ±Ìïú Ïù∏Ï¶ù URLÏùÑ ViewÎ°ú Ï†ÑÎã¨
 		model.addAttribute("kakao_url", KakaoUrl);
 		
 		System.out.println("/login/login");
@@ -54,38 +58,44 @@ public class LoginController {
 	@RequestMapping(value = "/kakaoOauth.do")
 	public String getKakaoSignIn(ModelMap model,@RequestParam("code") String code, HttpSession session) throws Exception {
 
-	  JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
+		//JsonNode accessToketn = kakao_rest_api.getAccessToken(code);
 
-	  System.out.println(userInfo);
+		JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
+				
+		System.out.println(userInfo);
 
-	  String id = userInfo.get("id").toString();
-	  String email = userInfo.get("kaccount_email").toString();
-	  String nickname = userInfo.get("properties").get("nickname").toString();
+		String id = userInfo.get("id").toString();
+		//String email = userInfo.get("kaccount_email").toString();
+		String nickname = userInfo.get("properties").get("nickname").toString();
 
-	  System.out.println(id + email);
+		System.out.println(nickname);
 
 
-	  model.addAttribute("k_userInfo", userInfo);
-	  model.addAttribute("id", id);
-	  model.addAttribute("email", email);
-	  model.addAttribute("nickname", nickname);
+		model.addAttribute("k_userInfo", userInfo);
+		model.addAttribute("id", id);
+		//model.addAttribute("email", email);
+	  	model.addAttribute("nickname", nickname);
 
-	  return "/main.do";
+	  	return "login/loginifo";
 	}
 	
-	// »∏ø¯∞°¿‘ GET
+	// ÌöåÏõêÍ∞ÄÏûÖ GET
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
 	public void signUpGET(Model model) throws Exception {
 		logger.info("get signUp");
 	}
 	
-	// »∏ø¯∞°¿‘ POST
+	// ÌöåÏõêÍ∞ÄÏûÖ POST
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
 	public String signUpPOST(Map<String, Object> modelMap, LoginVO userInfo) throws Exception {
 		logger.info("post signUp");
+<<<<<<< HEAD
 		
 		// ∫Òπ–π¯»£ æœ»£»≠«œø© userInfoø° ≥÷æÓ¡÷±‚
 		String pwd = pwdEncoder.encode(userInfo.getUserPW());
+=======
+		String pwd = pwdEncoder.encode(userInfo.getUserPW());		// ÏïîÌò∏ÌôîÌïòÏó¨ userInfoÏóê ÎÑ£Ïñ¥Ï£ºÍ∏∞
+>>>>>>> d3a74ac3c5ff4bfe38648e6848e2725c6a49b508
 		userInfo.setUserPW(pwd);
 		
 		
@@ -93,7 +103,7 @@ public class LoginController {
 		return "/login/signUp.do";
 	}
 	
-	// ID ¡ﬂ∫π »Æ¿Œ
+	// ID Ï§ëÎ≥µ ÌôïÏù∏
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
 	public void idCheck(HttpServletRequest request, String userID, HttpServletResponse response) throws Exception {
 		JSONObject jsonObject = new JSONObject();

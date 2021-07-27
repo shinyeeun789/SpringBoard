@@ -37,7 +37,7 @@ public class KakaoRestApi {
 	}
 	
 	
-	/** accessÅäÅ« get
+	/** accessí† í° get
 	 * 
 	 * @param autorize_code
 	 * @return
@@ -51,7 +51,7 @@ public class KakaoRestApi {
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", K_CLIENT_ID)); //REST API KEY
 		postParams.add(new BasicNameValuePair("redirect_uri", K_REDIRECT_URI)); // redrect uri
-		postParams.add(new BasicNameValuePair("code", autorize_code)); // ·Î±×ÀÎ °úÁ¤Áß ¾ò´Â code °ª
+		postParams.add(new BasicNameValuePair("code", autorize_code)); // ë¡œê·¸ì¸ ê³¼ì •ì¤‘ ì–»ëŠ” code ê°’
 		
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);
@@ -62,7 +62,7 @@ public class KakaoRestApi {
 			final HttpResponse response = client.execute(post);
 			final int reposeCode =response.getStatusLine().getStatusCode();
 			
-			//JSON ÇüÅÂ ¹İÈ¯°ª Ã³¸®
+			//JSON í˜•íƒœ ë°˜í™˜ê°’ ì²˜ë¦¬
 			
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
@@ -78,7 +78,7 @@ public class KakaoRestApi {
 	
 	public JsonNode getKakaoUserInfo(String autorize_code) throws ClientProtocolException, IOException {
 		
-		final String RequestUrl = "https://kapi.kakao.com/v1/user/me";
+		final String RequestUrl = "https://kapi.kakao.com/v2/user/me";
 		
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);
@@ -95,7 +95,7 @@ public class KakaoRestApi {
 			System.out.println("\nSending 'POST request to URL : " + RequestUrl);
 			System.out.println("Response Code : " + responseCode);
 			
-			//Json ÇüÅÂ ¹İÈ¯°ª Ã³¸®
+			//Json í˜•íƒœ ë°˜í™˜ê°’ ì²˜ë¦¬
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
 			
