@@ -2,10 +2,12 @@ package com.game.web;
 
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.game.auth.web.KakaoRestApi;
+import com.game.domain.LoginVO;
 
 
 
@@ -22,6 +25,9 @@ import com.game.auth.web.KakaoRestApi;
 @RequestMapping("/login/*")
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;		// 암호화 기능
 	
 	private KakaoRestApi kakao_rest_api = new KakaoRestApi();
 	
@@ -60,12 +66,24 @@ public class LoginController {
 	  return "/main.do";
 	}
 	
-	
+	// 회원가입 GET
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
-	public void signUp(Model model) throws Exception {
-		System.out.println("/login/signUp");
+	public void signUpGET(Model model) throws Exception {
+		logger.info("get signUp");
 	}
 	
+	// 회원가입 POST
+	@RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
+	public String signUpPOST(Map<String, Object> modelMap, LoginVO userInfo) throws Exception {
+		logger.info("post signUp");
+		String pwd = pwdEncoder.encode(userInfo.getUserPW());		// 암호화하여 userInfo에 넣어주기
+		userInfo.setUserPW(pwd);
+		
+		System.out.println(pwdEncoder.matches("asdf1234", userInfo.getUserPW()));
+		return "/login/signUp.do";
+	}
+	
+	// ID 중복 확인
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
 	public String idCheck(Model model, String userID) throws Exception {
 		System.out.println(userID);

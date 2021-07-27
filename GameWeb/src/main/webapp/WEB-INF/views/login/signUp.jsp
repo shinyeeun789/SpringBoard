@@ -53,26 +53,34 @@
 				$("#spanMSG").css("font-size", "12px").html("비밀번호와 비밀번호 확인이 일치하지 않습니다");
 				userPW.focus();
 			} else if(checkPassword(userPW)) {
-				alert('회원가입 진행!!');
+				$.ajax({
+					type: 'POST',
+					url : '/login/signUp.do',
+					data: 'userID='+userID.value+'&userName='+userName.value+'&userPW='+userPW.value,
+					dataType: 'json',
+					success:function(msg) {
+						alert('성공');
+					},
+					error:function(msg){alert("에러 \n\n관리자에게 문의하세요.");}
+				});
 			}
 		}
 		
-		chkInputSpace = function(text) {
+		chkInputSpace = function(text) {	// 공백문자 체크
 			var pattern = /\s/;
 			return text.search(pattern);
 		}
 		
-		checkPassword = function(pw) {
+		checkPassword = function(pw) {		// 비밀번호 유효성 검사
 			if(!/^[a-zA-Z0-9]{8,20}$/.test(pw.value)) {
-				$("#spanMSG").css("font-size", "12px").html("비밀번호는 숫자와 영문자 조합으로 8~20자리로 설정할 수 있습니다.");
+				$("#spanMSG").css("font-size", "12px").html("비밀번호는 영문자와 숫자 조합으로 8~20자리로 설정할 수 있습니다.");
 				userPW.focus();
 				return false;
 			}
-			
 			var chk_num = pw.value.search(/[0-9]/g);
 			var chk_eng = pw.value.search(/[a-z]/ig);
 			if(chk_num < 0 || chk_eng < 0) {
-				$("#spanMSG").css("font-size", "12px").html("비밀번호는 숫자와 영문자를 혼용하여 사용하여야 합니다.");
+				$("#spanMSG").css("font-size", "12px").html("비밀번호는 영문자와 숫자를 혼용하여 사용하여야 합니다.");
 				userPW.focus();
 				return false;
 			}
@@ -111,7 +119,7 @@
                                 </div>
                                 <div class="form-group">
                                 	<input type="password" class="form-control form-control-user"
-                                            id="userPW" placeholder="비밀번호">
+                                            id="userPW" placeholder="비밀번호 (영문자, 숫자 조합으로 8~20자리)">
                                 </div>
                                 <div class="form-group">
                                 	<input type="password" class="form-control form-control-user"
