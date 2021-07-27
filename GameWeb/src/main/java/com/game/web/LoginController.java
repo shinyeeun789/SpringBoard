@@ -69,6 +69,6 @@ public class LoginController {
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
 	public String idCheck(Model model, String userID) throws Exception {
 		System.out.println(userID);
-		return "/login/signUp";
+		return "/login/signUp.do";
 	}
 }

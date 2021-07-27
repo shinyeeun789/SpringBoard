@@ -60,15 +60,13 @@
                                         </div>
                                         <a href="index.html" class="btn btn-primary btn-user btn-block"> 로그인 </a>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Google 계정으로 로그인
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> facebook 계정으로 로그인
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> 카카오 로그인
-                                        </a>
+                                        <hr>
+		                                <a href="index.html" class="btn btn-light btn-user btn-block">
+		                                    <b>N</b> 네이버 계정으로 회원가입
+		                                </a>
+		                                <a href="index.html" class="btn btn-warning btn-user btn-block">
+		                                    <b>K</b> 카카오 계정으로 회원가입
+		                                </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
