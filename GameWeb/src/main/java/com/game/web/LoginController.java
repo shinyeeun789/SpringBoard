@@ -31,14 +31,10 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Inject
-<<<<<<< HEAD
 	private LoginService service;
 	
 	@Inject
-	BCryptPasswordEncoder pwdEncoder;		// ��ȣȭ ���
-=======
-	BCryptPasswordEncoder pwdEncoder;		// 암호화 기능
->>>>>>> d3a74ac3c5ff4bfe38648e6848e2725c6a49b508
+	BCryptPasswordEncoder pwdEncoder;
 	
 	private KakaoRestApi kakao_rest_api = new KakaoRestApi();
 	
@@ -47,7 +43,7 @@ public class LoginController {
 	public void login(Model model, HttpSession session) throws Exception {
 		
 		String KakaoUrl = kakao_rest_api.getAuthorizationUrl(session);
-		//생성한 인증 URL을 View로 전달
+		//ìƒì„±í•œ ì¸ì¦ URLì„ Viewë¡œ ì „ë‹¬
 		model.addAttribute("kakao_url", KakaoUrl);
 		
 		System.out.println("/login/login");
@@ -79,23 +75,18 @@ public class LoginController {
 	  	return "login/loginifo";
 	}
 	
-	// 회원가입 GET
+	// íšŒì›ê°€ìž… GET
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
 	public void signUpGET(Model model) throws Exception {
 		logger.info("get signUp");
 	}
 	
-	// 회원가입 POST
+	// íšŒì›ê°€ìž… POST
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
 	public String signUpPOST(Map<String, Object> modelMap, LoginVO userInfo) throws Exception {
 		logger.info("post signUp");
-<<<<<<< HEAD
-		
-		// ��й�ȣ ��ȣȭ�Ͽ� userInfo�� �־��ֱ�
+
 		String pwd = pwdEncoder.encode(userInfo.getUserPW());
-=======
-		String pwd = pwdEncoder.encode(userInfo.getUserPW());		// 암호화하여 userInfo에 넣어주기
->>>>>>> d3a74ac3c5ff4bfe38648e6848e2725c6a49b508
 		userInfo.setUserPW(pwd);
 		
 		
@@ -103,7 +94,7 @@ public class LoginController {
 		return "/login/signUp.do";
 	}
 	
-	// ID 중복 확인
+	// ID ì¤‘ë³µ í™•ì¸
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
 	public void idCheck(HttpServletRequest request, String userID, HttpServletResponse response) throws Exception {
 		JSONObject jsonObject = new JSONObject();
