@@ -5,6 +5,8 @@ public class LoginVO {
 	private String userID;
 	private String userPW;
 	
+	private String login_type;
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -23,4 +25,12 @@ public class LoginVO {
 	public void setUserPW(String userPW) {
 		this.userPW = userPW;
 	}
+	public String getLogin_type() {
+		return login_type;
+	}
+	public void setLogin_type(String login_type) {
+		this.login_type = login_type;
+	}
+	
+	
 }
