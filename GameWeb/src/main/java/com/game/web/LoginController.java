@@ -3,8 +3,11 @@ package com.game.web;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.game.auth.web.KakaoRestApi;
 import com.game.domain.LoginVO;
+import com.game.service.LoginService;
 
 
 
@@ -25,6 +29,9 @@ import com.game.domain.LoginVO;
 @RequestMapping("/login/*")
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
+	@Inject
+	private LoginService service;
 	
 	@Inject
 	BCryptPasswordEncoder pwdEncoder;		// 암호화 기능
@@ -76,17 +83,26 @@ public class LoginController {
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
 	public String signUpPOST(Map<String, Object> modelMap, LoginVO userInfo) throws Exception {
 		logger.info("post signUp");
-		String pwd = pwdEncoder.encode(userInfo.getUserPW());		// 암호화하여 userInfo에 넣어주기
+		
+		// 비밀번호 암호화하여 userInfo에 넣어주기
+		String pwd = pwdEncoder.encode(userInfo.getUserPW());
 		userInfo.setUserPW(pwd);
 		
-		System.out.println(pwdEncoder.matches("asdf1234", userInfo.getUserPW()));
+		
+		// System.out.println(pwdEncoder.matches("asdf1234", userInfo.getUserPW()));
 		return "/login/signUp.do";
 	}
 	
 	// ID 중복 확인
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
-	public String idCheck(Model model, String userID) throws Exception {
-		System.out.println(userID);
-		return "/login/signUp.do";
+	public void idCheck(HttpServletRequest request, String userID, HttpServletResponse response) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		boolean result = service.IDCheck(userID);
+		jsonObject.put("result", result);
+		try {
+			response.getWriter().print(jsonObject);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

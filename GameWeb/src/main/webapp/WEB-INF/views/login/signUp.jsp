@@ -31,7 +31,23 @@
 		});
 		
 		userIDCheck = function() {
-			console.log('아이디 체크');
+			var frm = document.signUp_frm;
+			var userID = frm.userID;
+			
+			$.ajax({
+				type: 'POST',
+				url : '/login/idCheck.do',
+				data: 'userID='+userID.value,
+				dataType: 'json',
+				success:function(data) {
+					if(data.result == true) {
+						$("#IdMSG").css("font-size", "12px").html("사용할 수 있는 아이디입니다.");
+					} else {
+						$("#IdMSG").css("font-size", "12px").html("이미 사용 중인 아이디입니다.");
+					}
+				},
+				error:function(msg){alert("아이디 중복 확인 에러 \n\n관리자에게 문의하세요.");}
+			});
 		}
 		
 		userSignUp = function() {
@@ -43,6 +59,9 @@
 			
 			if(chkInputSpace(userID.value) > -1) {
 				$("#spanMSG").css("font-size", "12px").html("아이디에 공백문자를 넣을 수 없습니다.");
+				userID.focus();
+			} else if(/[ㄱ-ㅎ}ㅏ-ㅣ|가-힣]/.test(userID.value)) {
+				$("#spanMSG").css("font-size", "12px").html("아이디에 한글은 사용할 수 없습니다.");
 				userID.focus();
 			} else if(chkInputSpace(userPW.value) > -1) {
 				$("#spanMSG").css("font-size", "12px").html("비밀번호에 공백문자를 넣을 수 없습니다.");
@@ -116,6 +135,9 @@
                                 	<div class="col-sm-4">
                                 		<a class="btn btn-secondary btn-user btn-block" id="btnIdCheck"> 중복 확인 </a>
                                 	</div>
+                                </div>
+                                <div class="form-group text-center">
+                                	<span class="text-danger" id="IdMSG"></span>
                                 </div>
                                 <div class="form-group">
                                 	<input type="password" class="form-control form-control-user"

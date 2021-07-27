@@ -1,5 +1,5 @@
 package com.game.service;
 
 public interface LoginService {
-	public void IDCheck(String userID) throws Exception;
+	public boolean IDCheck(String userID) throws Exception;
 }
