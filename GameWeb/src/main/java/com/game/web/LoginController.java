@@ -27,7 +27,7 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Inject
-	BCryptPasswordEncoder pwdEncoder;		// ¾ÏÈ£È­ ±â´É
+	BCryptPasswordEncoder pwdEncoder;		// ì•”í˜¸í™” ê¸°ëŠ¥
 	
 	private KakaoRestApi kakao_rest_api = new KakaoRestApi();
 	
@@ -36,7 +36,7 @@ public class LoginController {
 	public void login(Model model, HttpSession session) throws Exception {
 		
 		String KakaoUrl = kakao_rest_api.getAuthorizationUrl(session);
-		//»ı¼ºÇÑ ÀÎÁõ URLÀ» View·Î Àü´Ş
+		//ìƒì„±í•œ ì¸ì¦ URLì„ Viewë¡œ ì „ë‹¬
 		model.addAttribute("kakao_url", KakaoUrl);
 		
 		System.out.println("/login/login");
@@ -47,43 +47,45 @@ public class LoginController {
 	@RequestMapping(value = "/kakaoOauth.do")
 	public String getKakaoSignIn(ModelMap model,@RequestParam("code") String code, HttpSession session) throws Exception {
 
-	  JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
+		//JsonNode accessToketn = kakao_rest_api.getAccessToken(code);
 
-	  System.out.println(userInfo);
+		JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
+				
+		System.out.println(userInfo);
 
-	  String id = userInfo.get("id").toString();
-	  String email = userInfo.get("kaccount_email").toString();
-	  String nickname = userInfo.get("properties").get("nickname").toString();
+		String id = userInfo.get("id").toString();
+		//String email = userInfo.get("kaccount_email").toString();
+		String nickname = userInfo.get("properties").get("nickname").toString();
 
-	  System.out.println(id + email);
+		System.out.println(nickname);
 
 
-	  model.addAttribute("k_userInfo", userInfo);
-	  model.addAttribute("id", id);
-	  model.addAttribute("email", email);
-	  model.addAttribute("nickname", nickname);
+		model.addAttribute("k_userInfo", userInfo);
+		model.addAttribute("id", id);
+		//model.addAttribute("email", email);
+	  	model.addAttribute("nickname", nickname);
 
-	  return "/main.do";
+	  	return "login/loginifo";
 	}
 	
-	// È¸¿ø°¡ÀÔ GET
+	// íšŒì›ê°€ì… GET
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
 	public void signUpGET(Model model) throws Exception {
 		logger.info("get signUp");
 	}
 	
-	// È¸¿ø°¡ÀÔ POST
+	// íšŒì›ê°€ì… POST
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
 	public String signUpPOST(Map<String, Object> modelMap, LoginVO userInfo) throws Exception {
 		logger.info("post signUp");
-		String pwd = pwdEncoder.encode(userInfo.getUserPW());		// ¾ÏÈ£È­ÇÏ¿© userInfo¿¡ ³Ö¾îÁÖ±â
+		String pwd = pwdEncoder.encode(userInfo.getUserPW());		// ì•”í˜¸í™”í•˜ì—¬ userInfoì— ë„£ì–´ì£¼ê¸°
 		userInfo.setUserPW(pwd);
 		
 		System.out.println(pwdEncoder.matches("asdf1234", userInfo.getUserPW()));
 		return "/login/signUp.do";
 	}
 	
-	// ID Áßº¹ È®ÀÎ
+	// ID ì¤‘ë³µ í™•ì¸
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
 	public String idCheck(Model model, String userID) throws Exception {
 		System.out.println(userID);
