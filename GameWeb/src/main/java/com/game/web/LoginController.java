@@ -28,95 +28,82 @@ import com.game.service.LoginService;
 @Controller
 @RequestMapping("/login/*")
 public class LoginController {
+	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	
-	@Inject
-	private LoginService service;
-	
-	@Inject
-	BCryptPasswordEncoder pwdEncoder;		// 암호화 기능
-	private KakaoRestApi kakao_rest_api = new KakaoRestApi();
-	
-	
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public void login(Model model, HttpSession session) throws Exception {
+   
+	   @Inject
+	   private LoginService service;
+	   
+	   @Inject
+	   BCryptPasswordEncoder pwdEncoder;      // 암호화 기능
+	   private KakaoRestApi kakao_rest_api = new KakaoRestApi();
+	   
+	   
+	   @RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	   public void login(Model model, HttpSession session) throws Exception {
+	      
+		  String KakaoUrl = kakao_rest_api.getAuthorizationUrl(session);
+		  model.addAttribute("kakao_url", KakaoUrl);
+		  
+		  System.out.println("/login/login");
+	      
+	   }
+	   
+	   
+	   @RequestMapping(value = "/kakaoOauth.do")
+	   public String getKakaoSignIn(ModelMap model,@RequestParam("code") String code, HttpSession session) throws Exception {
+		   
+		   //JsonNode accessToketn = kakao_rest_api.getAccessToken(code);
 		
-		String KakaoUrl = kakao_rest_api.getAuthorizationUrl(session);
-		model.addAttribute("kakao_url", KakaoUrl);
-		
-		System.out.println("/login/login");
-		
-	}
-	
-	
-	@RequestMapping(value = "/kakaoOauth.do")
-	public String getKakaoSignIn(ModelMap model,@RequestParam("code") String code, HttpSession session) throws Exception {
-
-		//JsonNode accessToketn = kakao_rest_api.getAccessToken(code);
-
-		JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
-				
-		System.out.println(userInfo);
-
-		String id = userInfo.get("id").toString();
-		//String email = userInfo.get("kaccount_email").toString();
-		String nickname = userInfo.get("properties").get("nickname").toString();
-
-		System.out.println(nickname);
-
-
-		model.addAttribute("k_userInfo", userInfo);
-		model.addAttribute("id", id);
-		//model.addAttribute("email", email);
-	  	model.addAttribute("nickname", nickname);
-
-	  	return "login/loginifo";
-	}
-	
-<<<<<<< HEAD
-	// 챠큄흸챙�봔먄ぢ겸궗챙탑�� GET
-=======
-	// 회원가입 GET
->>>>>>> d577ada632533c514c2fa8d7687391e8d64cce25
-	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
-	public void signUpGET(Model model) throws Exception {
-		logger.info("get signUp");
-	}
-	
-<<<<<<< HEAD
-	// 챠큄흸챙�봔먄ぢ겸궗챙탑�� POST
-=======
-	// 회원가입 POST
->>>>>>> d577ada632533c514c2fa8d7687391e8d64cce25
-	@RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
-	public String signUpPOST(Map<String, Object> modelMap, LoginVO userInfo, HttpServletRequest request) throws Exception {
-		logger.info("post signUp");
-		
-		// 비밀번호 암호화하여 userInfo에 넣어주기
-		String pwd = pwdEncoder.encode(userInfo.getUserPW());
-		userInfo.setUserPW(pwd);
-		
-		System.out.println(pwd.length());
-		
-		int result = service.insertUser(userInfo);
-		
-		// System.out.println(pwdEncoder.matches("asdf1234", userInfo.getUserPW()));
-		return "redirect:/login/login.do";
-	}
-	
-<<<<<<< HEAD
-	// ID 챙짚�샖ヂ냈� 챠�꽓�▣�혶쨍
-=======
->>>>>>> d577ada632533c514c2fa8d7687391e8d64cce25
-	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
-	public void idCheck(HttpServletRequest request, String userID, HttpServletResponse response) throws Exception {
-		JSONObject jsonObject = new JSONObject();
-		boolean result = service.IDCheck(userID);
-		jsonObject.put("result", result);
-		try {
-			response.getWriter().print(jsonObject);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+			JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
+			        
+			System.out.println(userInfo);
+			
+			String id = userInfo.get("id").toString();
+			//String email = userInfo.get("kaccount_email").toString();
+			String nickname = userInfo.get("properties").get("nickname").toString();
+			
+			System.out.println(nickname);
+			
+			
+			model.addAttribute("k_userInfo", userInfo);
+			model.addAttribute("id", id);
+			//model.addAttribute("email", email);
+			model.addAttribute("nickname", nickname);
+			
+			return "login/loginifo";
+	   }
+	   
+	   // 회원가입 GET
+	   @RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
+	   public void signUpGET(Model model) throws Exception {
+	        logger.info("get signUp");
+	   }
+	   
+	   // 회원가입 POST
+	   @RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
+	   public String signUpPOST(Map<String, Object> modelMap, LoginVO userInfo, HttpServletRequest request) throws Exception {
+	        logger.info("post signUp");
+	  
+			// 비밀번호 암호화하여 userInfo에 넣어주기
+			String pwd = pwdEncoder.encode(userInfo.getUserPW());
+			userInfo.setUserPW(pwd);
+				  
+			service.insertUser(userInfo);
+				  
+			// System.out.println(pwdEncoder.matches("asdf1234", userInfo.getUserPW()));
+			return "redirect:/login/login.do";
+	   }
+	   
+	   @RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
+	   public void idCheck(HttpServletRequest request, String userID, HttpServletResponse response) throws Exception {
+			JSONObject jsonObject = new JSONObject();
+			boolean result = service.IDCheck(userID);
+			jsonObject.put("result", result);
+			try {
+			     response.getWriter().print(jsonObject);
+			} catch(Exception e) {
+			     e.printStackTrace();
+			}
+	   }
 }
