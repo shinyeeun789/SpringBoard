@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.game.domain.LoginVO;
+
 @Repository
 public class LoginDAOImpl implements LoginDAO {
 	
@@ -16,5 +18,10 @@ public class LoginDAOImpl implements LoginDAO {
 	@Override
 	public int IDCheck(String userID) throws Exception {
 		return session.selectOne(namespace+".IDCheck", userID);
+	}
+
+	@Override
+	public int insertUser(LoginVO loginVO) throws Exception {
+		return session.insert(namespace+".insertUser", loginVO);
 	}
 }

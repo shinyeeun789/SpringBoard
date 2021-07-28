@@ -9,4 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select EXISTS (select user_id from users where user_id = #{value}) as success;
 	</select>
 
+	<insert id="insertUser" parameterType="LoginVO">
+		insert into users(user_id, user_name, password, create_date)
+		values(#{userID}, #{userName}, #{userPW}, now());
+	</insert>
 </mapper>

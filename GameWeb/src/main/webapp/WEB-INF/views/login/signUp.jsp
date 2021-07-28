@@ -56,7 +56,7 @@
 			var userID = frm.userID;
 			var userPW = frm.userPW;
 			var userRepeatPW = frm.userRepeatPW;
-			
+
 			if(chkInputSpace(userID.value) > -1) {
 				$("#spanMSG").css("font-size", "12px").html("아이디에 공백문자를 넣을 수 없습니다.");
 				userID.focus();
@@ -71,17 +71,11 @@
 			} else if(userPW.value != userRepeatPW.value) {
 				$("#spanMSG").css("font-size", "12px").html("비밀번호와 비밀번호 확인이 일치하지 않습니다");
 				userPW.focus();
+			} else if($("#IdMSG").text() != '사용할 수 있는 아이디입니다.') {
+				$("#spanMSG").css("font-size", "12px").html("아이디 중복 확인을 해주세요.");
 			} else if(checkPassword(userPW)) {
-				$.ajax({
-					type: 'POST',
-					url : '/login/signUp.do',
-					data: 'userID='+userID.value+'&userName='+userName.value+'&userPW='+userPW.value,
-					dataType: 'json',
-					success:function(msg) {
-						alert('성공');
-					},
-					error:function(msg){alert("에러 \n\n관리자에게 문의하세요.");}
-				});
+				frm.action = '/login/signUp.do';
+				frm.submit();
 			}
 		}
 		
@@ -122,14 +116,15 @@
                         	<div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form method="post" class="user" name="signUp_frm" onsubmit="return false">
+                            
+                            <form method="post" class="user" name="signUp_frm" onsubmit="return false;">
                                	<div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="userName"
+                                    <input type="text" class="form-control form-control-user" id="userName" name="userName"
                                         placeholder="닉네임">
                                 </div>
                                 <div class="form-group row">
                                 	<div class="col-sm-8 mb-3 mb-sm-0">
-                                		<input type="text" class="form-control form-control-user" id="userID"
+                                		<input type="text" class="form-control form-control-user" id="userID" name="userID"
                                         placeholder="아이디">
                                 	</div>
                                 	<div class="col-sm-4">
@@ -141,11 +136,11 @@
                                 </div>
                                 <div class="form-group">
                                 	<input type="password" class="form-control form-control-user"
-                                            id="userPW" placeholder="비밀번호 (영문자, 숫자 조합으로 8~20자리)">
+                                            id="userPW" name="userPW" placeholder="비밀번호 (영문자, 숫자 조합으로 8~20자리)">
                                 </div>
                                 <div class="form-group">
                                 	<input type="password" class="form-control form-control-user"
-                                            id="userRepeatPW" placeholder="비밀번호 확인">
+                                            id="userRepeatPW" name="userRepeatPW" placeholder="비밀번호 확인">
                                 </div>
                                 <div class="form-group text-center">
                                 	<span class="text-danger" id="spanMSG"></span>
@@ -154,6 +149,7 @@
                                 	회원가입
                                 </button>
                             </form>
+                            
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="/login/login.do"> 이미 계정이 있나요? </a>
