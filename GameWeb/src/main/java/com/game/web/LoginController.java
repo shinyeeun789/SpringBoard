@@ -73,13 +73,13 @@ public class LoginController {
 	  	return "login/loginifo";
 	}
 	
-	// íšŒì›ê°€ìž… GET
+	// 회원가입 GET
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
 	public void signUpGET(Model model) throws Exception {
 		logger.info("get signUp");
 	}
 	
-	// íšŒì›ê°€ìž… POST
+	// 회원가입 POST
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
 	public String signUpPOST(Map<String, Object> modelMap, LoginVO userInfo, HttpServletRequest request) throws Exception {
 		logger.info("post signUp");
