@@ -101,7 +101,7 @@ public class LoginController {
 		int result = service.insertUser(userInfo);
 		
 		// System.out.println(pwdEncoder.matches("asdf1234", userInfo.getUserPW()));
-		return "/login/signUp.do";
+		return "redirect:/login/login.do";
 	}
 	
 <<<<<<< HEAD
