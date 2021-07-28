@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KakaoRestApi {
 	private final static String K_CLIENT_ID = "db1cd9e8343b76d2a21deae2ce17abbd";
-	private final static String K_REDIRECT_URI="http://localhost:8081/kakaoOauth.do";
+	private final static String K_REDIRECT_URI="http://localhost:8081/login/kakaoOauth.do";
 	
 	/** authorization Url get
 	 * 
@@ -37,7 +37,7 @@ public class KakaoRestApi {
 	}
 	
 	
-	/** access토큰 get
+	/** access�넗�겙 get
 	 * 
 	 * @param autorize_code
 	 * @return
@@ -51,7 +51,7 @@ public class KakaoRestApi {
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", K_CLIENT_ID)); //REST API KEY
 		postParams.add(new BasicNameValuePair("redirect_uri", K_REDIRECT_URI)); // redrect uri
-		postParams.add(new BasicNameValuePair("code", autorize_code)); // 로그인 과정중 얻는 code 값
+		postParams.add(new BasicNameValuePair("code", autorize_code)); 
 		
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);
@@ -62,7 +62,7 @@ public class KakaoRestApi {
 			final HttpResponse response = client.execute(post);
 			final int reposeCode =response.getStatusLine().getStatusCode();
 			
-			//JSON 형태 반환값 처리
+			//JSON �삎�깭 諛섑솚媛� 泥섎━
 			
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
@@ -95,7 +95,7 @@ public class KakaoRestApi {
 			System.out.println("\nSending 'POST request to URL : " + RequestUrl);
 			System.out.println("Response Code : " + responseCode);
 			
-			//Json 형태 반환값 처리
+			
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
 			

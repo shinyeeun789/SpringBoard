@@ -43,7 +43,6 @@ public class LoginController {
 	public void login(Model model, HttpSession session) throws Exception {
 		
 		String KakaoUrl = kakao_rest_api.getAuthorizationUrl(session);
-		//ìƒì„±í•œ ì¸ì¦ URLì„ Viewë¡œ ì „ë‹¬
 		model.addAttribute("kakao_url", KakaoUrl);
 		
 		System.out.println("/login/login");
@@ -75,13 +74,13 @@ public class LoginController {
 	  	return "login/loginifo";
 	}
 	
-	// íšŒì›ê°€ìž… GET
+	// 챠큄흸챙�봔먄ぢ겸궗챙탑�� GET
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
 	public void signUpGET(Model model) throws Exception {
 		logger.info("get signUp");
 	}
 	
-	// íšŒì›ê°€ìž… POST
+	// 챠큄흸챙�봔먄ぢ겸궗챙탑�� POST
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.POST)
 	public String signUpPOST(Map<String, Object> modelMap, LoginVO userInfo) throws Exception {
 		logger.info("post signUp");
@@ -94,7 +93,7 @@ public class LoginController {
 		return "/login/signUp.do";
 	}
 	
-	// ID ì¤‘ë³µ í™•ì¸
+	// ID 챙짚�샖ヂ냈� 챠�꽓�▣�혶쨍
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
 	public void idCheck(HttpServletRequest request, String userID, HttpServletResponse response) throws Exception {
 		JSONObject jsonObject = new JSONObject();
