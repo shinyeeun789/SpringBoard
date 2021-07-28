@@ -37,7 +37,7 @@ public class KakaoRestApi {
 	}
 	
 	
-	/** access�넗�겙 get
+	/** access토큰 get
 	 * 
 	 * @param autorize_code
 	 * @return

@@ -4,8 +4,13 @@ public class LoginVO {
 	private String userName;
 	private String userID;
 	private String userPW;
-	
 	private String login_type;
+	
+	//user_log
+	private String login_status;
+	
+	//sns_login_info
+	private String sns_id;
 	
 	public String getUserName() {
 		return userName;
