@@ -159,7 +159,7 @@
                                     src="../resources/img/undraw_posting_photo.svg" alt="...">
                             </div>
                             <p> 게임에 참여하려면 로그인 해주세요. </p>
-                            <a rel="nofollow" href="/login/login.do"> 로그인 하기 &rarr;</a>
+                            <a rel="nofollow" href="/login/login.do"> 로그인하기 &rarr;</a>
                         </div>
                     </div>
                     
