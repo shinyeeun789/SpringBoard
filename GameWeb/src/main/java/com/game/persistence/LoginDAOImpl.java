@@ -25,8 +25,10 @@ public class LoginDAOImpl implements LoginDAO {
 		return session.insert(namespace+".insertUser", loginVO);
 	}
 
+
 	@Override
-	public void insertKaKoUser(LoginVO loginVO) throws Exception {
-		session.insert(namespace+".insertKaKoUser", loginVO);
+	public void updateKaKoLogin(LoginVO loginVO) throws Exception {
+		session.update(namespace+".updateKaKoLogin", loginVO);
+		
 	}
 }

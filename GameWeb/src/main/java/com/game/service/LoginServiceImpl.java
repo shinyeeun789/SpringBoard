@@ -27,21 +27,19 @@ public class LoginServiceImpl implements LoginService {
 		return dao.insertUser(loginVO);
 	}
 
+
 	@Override
-	public LoginVO kakaoSignUP(JsonNode userInfo) throws Exception { 
-	
+	public LoginVO kakaoLogin(JsonNode userInfo) throws Exception {
 		LoginVO loginVO = new LoginVO();
 		
 		try {
 			
 			loginVO.setUserID(userInfo.get("id").toString());
+			loginVO.setLogin_status("login");
 			loginVO.setUserName(userInfo.get("properties").get("nickname").toString());
 			loginVO.setLogin_type("KAKAO");
-			loginVO.setLogin_status("login");
 			
-			dao.insertKaKoUser(loginVO);
-//			dao.insertKaKoUser(loginVO);
-//			dao.insertKaKoUser(loginVO);
+			dao.updateKaKoLogin(loginVO);
 			
 		}catch (Exception e) {
 			e.printStackTrace();

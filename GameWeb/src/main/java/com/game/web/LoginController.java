@@ -59,25 +59,13 @@ public class LoginController {
 			JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
 			
 			LoginVO loginVO = new LoginVO();
-			loginVO.setLogin_status(code);
 			
-			String userID = userInfo.get("id").toString();
-			boolean result = service.IDCheck(userID);
+			// 카카오 로그인 및 회원가입
+			loginVO = service.kakaoLogin(userInfo);
 			
-			
-			if(result) {
-				//가입된것이 없으면 알아서 회원가입
-				loginVO = service.kakaoSignUP(userInfo);
-				
-			}else {
-				//가입된 상태
-				loginVO = service.kakaoSignUP(userInfo);
-			}
-			
-			session.setAttribute("loginCheck", true);
 			session.setAttribute("userInfo", loginVO);
 			
-			return "login/loginifo";
+			return "redirect:login/loginifo";
 	   }
 	   
 	   // 회원가입 GET
@@ -111,4 +99,6 @@ public class LoginController {
 			     e.printStackTrace();
 			}
 	   }
+	   
+	   
 }

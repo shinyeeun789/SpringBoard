@@ -8,6 +8,6 @@ public interface LoginService {
 	public boolean IDCheck(String userID) throws Exception;
 	
 	public int insertUser(LoginVO loginVO) throws Exception;
-
-	public LoginVO kakaoSignUP(JsonNode userInfo) throws Exception;
+	
+	public LoginVO kakaoLogin(JsonNode userInfo) throws Exception;
 }
