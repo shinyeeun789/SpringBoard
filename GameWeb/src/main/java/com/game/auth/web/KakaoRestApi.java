@@ -30,8 +30,8 @@ public class KakaoRestApi {
 	 */
 	public String getAuthorizationUrl(HttpSession session) {
 		
-		String kakoUrl = "https://kauth.kako.com/oauth/authorize?"
-				+"cliendt_id=" + K_CLIENT_ID + "&redirect_uri=" 
+		String kakoUrl = "https://kauth.kakao.com/oauth/authorize?"
+				+"client_id=" + K_CLIENT_ID + "&redirect_uri=" 
 				+ K_REDIRECT_URI + "&response_type=code";
 		return kakoUrl;
 	}
@@ -62,7 +62,6 @@ public class KakaoRestApi {
 			final HttpResponse response = client.execute(post);
 			final int reposeCode =response.getStatusLine().getStatusCode();
 			
-			//JSON �삎�깭 諛섑솚媛� 泥섎━
 			
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
@@ -113,5 +112,10 @@ public class KakaoRestApi {
 		
 		return returnNode;
 	}
+	
+	
+//	public JsonNode Logout(String autorize_code) {
+//		final String RequestUrl = "https://kapi.kakao.com/v1/user/logout";
+//	}
 
 }

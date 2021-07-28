@@ -23,6 +23,11 @@
 
 </head>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		var kakao_url = "<%= request.getParameter("kakao_url")%>";
+	});
+</script>
 <body class="bg-gradient-primary">
 
     <div class="container">
@@ -64,7 +69,7 @@
 		                                <a href="index.html" class="btn btn-light btn-user btn-block">
 		                                    <b>N</b> 네이버 계정으로 로그인
 		                                </a>
-		                                <a href="https://kauth.kakao.com/oauth/authorize?client_id=db1cd9e8343b76d2a21deae2ce17abbd&redirect_uri=http://localhost:8081/login/kakaoOauth.do&response_type=code" class="btn btn-warning btn-user btn-block">
+		                                <a href="${kakao_url}" class="btn btn-warning btn-user btn-block">
 		                                    <b>K</b> 카카오 계정으로 로그인
 		                                </a>
                                     </form>

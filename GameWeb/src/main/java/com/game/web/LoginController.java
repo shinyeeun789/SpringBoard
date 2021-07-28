@@ -36,36 +36,45 @@ public class LoginController {
 	   
 	   @Inject
 	   BCryptPasswordEncoder pwdEncoder;      // 암호화 기능
-	   private KakaoRestApi kakao_rest_api = new KakaoRestApi();
+	   
 	   
 	   
 	   @RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	   public void login(Model model, HttpSession session) throws Exception {
+		   
+		  KakaoRestApi kakao_rest_api = new KakaoRestApi();
 	      
 		  String KakaoUrl = kakao_rest_api.getAuthorizationUrl(session);
 		  
 		  model.addAttribute("kakao_url", KakaoUrl);
+		  System.out.println(KakaoUrl);
 		  
 		  System.out.println("/login/login");
 	      
 	   }
 	   
 	   
-	   @RequestMapping(value = "/kakaoOauth.do")
+	   @RequestMapping(value = "/kakaoOauth.do", method = RequestMethod.POST)
 	   public String getKakaoSignIn(ModelMap model,@RequestParam("code") String code, HttpSession session) throws Exception {
-		   
-		   //JsonNode accessToketn = kakao_rest_api.getAccessToken(code);
 		
+		   KakaoRestApi kakao_rest_api = new KakaoRestApi();
+		   
 			JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
 			
 			LoginVO loginVO = new LoginVO();
 			
 			// 카카오 로그인 및 회원가입
-			loginVO = service.kakaoLogin(userInfo);
+			try {
+				loginVO = service.kakaoLogin(userInfo);
 			
-			session.setAttribute("userInfo", loginVO);
+				session.setAttribute("loginCheck ", true);
+				session.setAttribute("userInfo", loginVO);
 			
-			return "redirect:login/loginifo";
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return "redirect:/main.do";
 	   }
 	   
 	   // 회원가입 GET
@@ -90,7 +99,9 @@ public class LoginController {
 	   
 	   @RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
 	   public void idCheck(HttpServletRequest request, String userID, HttpServletResponse response) throws Exception {
-			JSONObject jsonObject = new JSONObject();
+			
+		   JSONObject jsonObject = new JSONObject();
+		   
 			boolean result = service.IDCheck(userID);
 			jsonObject.put("result", result);
 			try {
@@ -99,6 +110,21 @@ public class LoginController {
 			     e.printStackTrace();
 			}
 	   }
+	   
+	   
+	   @RequestMapping(value="/logout.do", method = RequestMethod.GET)
+	   public void logout(Model model, HttpSession session) throws Exception {
+		   //
+		   LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+		   
+		   if(loginVO.getLogin_type() == "KAKAO") {
+			   //카카오 restApi 객체 선어
+			   KakaoRestApi kakao_rest_api = new KakaoRestApi();
+			   
+			   //JsonNode node = kakao_rest_api.
+		   }
+	   }
+	   
 	   
 	   
 }
