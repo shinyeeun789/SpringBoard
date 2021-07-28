@@ -73,6 +73,8 @@ public class KakaoRestApi {
 			e.printStackTrace();
 		}
 		
+		System.out.println(returnNode);
+		
 		return returnNode.get("access_token").toString();
 	}
 	

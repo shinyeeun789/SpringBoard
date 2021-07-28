@@ -13,4 +13,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into users(user_id, user_name, password, create_date)
 		values(#{userID}, #{userName}, #{userPW}, now());
 	</insert>
+	
+	
+	<insert id="insertKaKoUser" parameterType="LoginVO">
+		INSERT INTO users(user_id, user_name, create_date, login_type)
+		VALUES(#{userID}, #{userName},now(), #{login_type});
+
+	</insert>
+	
 </mapper>

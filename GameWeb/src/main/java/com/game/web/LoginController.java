@@ -43,6 +43,7 @@ public class LoginController {
 	   public void login(Model model, HttpSession session) throws Exception {
 	      
 		  String KakaoUrl = kakao_rest_api.getAuthorizationUrl(session);
+		  
 		  model.addAttribute("kakao_url", KakaoUrl);
 		  
 		  System.out.println("/login/login");
@@ -56,20 +57,25 @@ public class LoginController {
 		   //JsonNode accessToketn = kakao_rest_api.getAccessToken(code);
 		
 			JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
-			        
-			System.out.println(userInfo);
 			
-			String id = userInfo.get("id").toString();
-			//String email = userInfo.get("kaccount_email").toString();
-			String nickname = userInfo.get("properties").get("nickname").toString();
+			LoginVO loginVO = new LoginVO();
+			loginVO.setLogin_status(code);
 			
-			System.out.println(nickname);
+			String userID = userInfo.get("id").toString();
+			boolean result = service.IDCheck(userID);
 			
 			
-			model.addAttribute("k_userInfo", userInfo);
-			model.addAttribute("id", id);
-			//model.addAttribute("email", email);
-			model.addAttribute("nickname", nickname);
+			if(result) {
+				//가입된것이 없으면 알아서 회원가입
+				loginVO = service.kakaoSignUP(userInfo);
+				
+			}else {
+				//가입된 상태
+				loginVO = service.kakaoSignUP(userInfo);
+			}
+			
+			session.setAttribute("loginCheck", true);
+			session.setAttribute("userInfo", loginVO);
 			
 			return "login/loginifo";
 	   }
@@ -88,7 +94,6 @@ public class LoginController {
 			// 비밀번호 암호화하여 userInfo에 넣어주기
 			String pwd = pwdEncoder.encode(userInfo.getUserPW());
 			userInfo.setUserPW(pwd);
-				  
 			service.insertUser(userInfo);
 				  
 			// System.out.println(pwdEncoder.matches("asdf1234", userInfo.getUserPW()));

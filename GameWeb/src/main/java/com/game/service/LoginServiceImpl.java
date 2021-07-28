@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.game.domain.LoginVO;
 import com.game.persistence.LoginDAO;
 
@@ -25,4 +26,29 @@ public class LoginServiceImpl implements LoginService {
 	public int insertUser(LoginVO loginVO) throws Exception {
 		return dao.insertUser(loginVO);
 	}
+
+	@Override
+	public LoginVO kakaoSignUP(JsonNode userInfo) throws Exception { 
+	
+		LoginVO loginVO = new LoginVO();
+		
+		try {
+			
+			loginVO.setUserID(userInfo.get("id").toString());
+			loginVO.setUserName(userInfo.get("properties").get("nickname").toString());
+			loginVO.setLogin_type("KAKAO");
+			loginVO.setLogin_status("login");
+			
+			dao.insertKaKoUser(loginVO);
+//			dao.insertKaKoUser(loginVO);
+//			dao.insertKaKoUser(loginVO);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return loginVO;
+	}
+	
+	
 }

@@ -36,6 +36,18 @@ public class LoginVO {
 	public void setLogin_type(String login_type) {
 		this.login_type = login_type;
 	}
+	public String getLogin_status() {
+		return login_status;
+	}
+	public void setLogin_status(String login_status) {
+		this.login_status = login_status;
+	}
+	public String getSns_id() {
+		return sns_id;
+	}
+	public void setSns_id(String sns_id) {
+		this.sns_id = sns_id;
+	}
 	
 	
 }
