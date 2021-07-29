@@ -6,11 +6,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.game.mapper.loginMapper">
 
 	<select id="IDCheck" resultType="int" parameterType="String">
-		select EXISTS (select user_id from users where user_id = #{value}) as success;
+		SELECT EXISTS (select user_id from users where user_id = #{value}) as success;
 	</select>
 
 	<insert id="insertUser" parameterType="LoginVO">
-		insert into users(user_id, user_name, password, create_date)
-		values(#{userID}, #{userName}, #{userPW}, now());
+		INSERT INTO users(user_id, user_name, password, create_date)
+		VALUES(#{user_id}, #{user_name}, #{password}, now());
+	</insert>
+	
+	<select id="naverConnectionCheck" parameterType="hashMap" resultType="hashMap">
+		SELECT user_id, naver_login
+		FROM users
+		WHERE user_id = #{email}
+	</select>
+	
+	<select id="userNaverLoginPro" parameterType="hashMap" resultType="hashMap">
+		SELECT user_id, user_name
+		FROM users
+		WHERE user_id = #{email} AND naver_login = #{id}
+	</select>
+	
+	<insert id="insertNaverUser" parameterType="LoginVO">
+		INSERT INTO users(user_id, user_name, naver_login, create_date)
+		VALUES(#{user_id}, #{user_name}, #{naver_login}, now());
 	</insert>
 </mapper>

@@ -1,3 +1,6 @@
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,10 +24,11 @@
     <!-- Custom styles for this template-->
     <link href="../../resources/css/sb-admin-2.min.css" rel="stylesheet">
 
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+	
 </head>
 
 <body class="bg-gradient-primary">
-
     <div class="container">
 
         <!-- Outer Row -->
@@ -55,18 +59,19 @@
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck"> Remember Me </label>
+                                                <label class="custom-control-label" for="customCheck"> 아이디 저장 </label>
                                             </div>
                                         </div>
                                         <a href="index.html" class="btn btn-primary btn-user btn-block"> 로그인 </a>
                                         <hr>
-                                        <hr>
-		                                <a href="index.html" class="btn btn-light btn-user btn-block">
-		                                    <b>N</b> 네이버 계정으로 로그인
-		                                </a>
-		                                <a href="index.html" class="btn btn-warning btn-user btn-block">
-		                                    <b>K</b> 카카오 계정으로 로그인
-		                                </a>
+                                        <div class="text-center">
+                                        	<a href="${naverUrl}" class="btn">
+			                                	<img height="40" src="../../resources/img/btnNaverLogin.png"/>
+			                                </a>
+			                                <a href="index.html" class="btn">
+			                                    <img height="40" src="../../resources/img/btnKakaoLogin.png">
+			                                </a>
+                                        </div>
                                     </form>
                                     <hr>
                                     <div class="text-center">

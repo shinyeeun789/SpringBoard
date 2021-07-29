@@ -1,5 +1,7 @@
 package com.game.service;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -24,5 +26,20 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public int insertUser(LoginVO loginVO) throws Exception {
 		return dao.insertUser(loginVO);
+	}
+
+	@Override
+	public Map<String, Object> naverConnectionCheck(Map<String, Object> apiJson) throws Exception {
+		return dao.naverConnectionCheck(apiJson);
+	}
+
+	@Override
+	public Map<String, Object> userNaverLoginPro(Map<String, Object> apiJson) throws Exception {
+		return dao.userNaverLoginPro(apiJson);
+	}
+
+	@Override
+	public int insertNaverUser(LoginVO loginVO) throws Exception {
+		return dao.insertNaverUser(loginVO);
 	}
 }
