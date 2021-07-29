@@ -1,5 +1,7 @@
 package com.game.service;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -27,6 +29,20 @@ public class LoginServiceImpl implements LoginService {
 		return dao.insertUser(loginVO);
 	}
 
+	@Override
+	public Map<String, Object> naverConnectionCheck(Map<String, Object> apiJson) throws Exception {
+		return dao.naverConnectionCheck(apiJson);
+	}
+
+	@Override
+	public LoginVO userNaverLoginPro(Map<String, Object> apiJson) throws Exception {
+		return dao.userNaverLoginPro(apiJson);
+	}
+
+	@Override
+	public int insertNaverUser(LoginVO loginVO) throws Exception {
+		return dao.insertNaverUser(loginVO);
+	}
 
 	@Override
 	public LoginVO kakaoLogin(JsonNode userInfo) throws Exception {
@@ -34,9 +50,9 @@ public class LoginServiceImpl implements LoginService {
 		
 		try {
 			
-			loginVO.setUserID(userInfo.get("id").toString());
+			loginVO.setUser_id(userInfo.get("id").toString());
 			loginVO.setLogin_status("login");
-			loginVO.setUserName(userInfo.get("properties").get("nickname").toString());
+			loginVO.setUser_name(userInfo.get("properties").get("nickname").toString());
 			loginVO.setLogin_type("KAKAO");
 			
 			dao.updateKaKoLogin(loginVO);
@@ -47,6 +63,4 @@ public class LoginServiceImpl implements LoginService {
 		
 		return loginVO;
 	}
-	
-	
 }

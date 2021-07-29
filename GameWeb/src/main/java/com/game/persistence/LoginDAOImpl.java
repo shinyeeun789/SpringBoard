@@ -1,5 +1,7 @@
 package com.game.persistence;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,10 +27,25 @@ public class LoginDAOImpl implements LoginDAO {
 		return session.insert(namespace+".insertUser", loginVO);
 	}
 
+	@Override
+	public Map<String, Object> naverConnectionCheck(Map<String, Object> apiJson) {
+		return session.selectOne(namespace+".naverConnectionCheck", apiJson);
+	}
+
+	@Override
+	public LoginVO userNaverLoginPro(Map<String, Object> apiJson) {
+		return session.selectOne(namespace+".userNaverLoginPro", apiJson);
+	}
+
+	@Override
+	public int insertNaverUser(LoginVO loginVO) throws Exception {
+		
+		System.out.println(loginVO.getNaver_login().length());
+		return session.insert(namespace+".insertNaverUser", loginVO);
+	}
 
 	@Override
 	public void updateKaKoLogin(LoginVO loginVO) throws Exception {
 		session.update(namespace+".updateKaKoLogin", loginVO);
-		
 	}
 }

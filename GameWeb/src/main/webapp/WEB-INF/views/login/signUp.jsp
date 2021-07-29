@@ -32,12 +32,12 @@
 		
 		userIDCheck = function() {
 			var frm = document.signUp_frm;
-			var userID = frm.userID;
+			var userID = frm.user_id;
 			
 			$.ajax({
 				type: 'POST',
 				url : '/login/idCheck.do',
-				data: 'userID='+userID.value,
+				data: 'user_id='+userID.value,
 				dataType: 'json',
 				success:function(data) {
 					if(data.result == true) {
@@ -52,9 +52,9 @@
 		
 		userSignUp = function() {
 			var frm = document.signUp_frm;
-			var userName = frm.userName;
-			var userID = frm.userID;
-			var userPW = frm.userPW;
+			var userName = frm.user_name;
+			var userID = frm.user_id;
+			var userPW = frm.password;
 			var userRepeatPW = frm.userRepeatPW;
 
 			if(chkInputSpace(userID.value) > -1) {
@@ -119,12 +119,12 @@
                             
                             <form method="post" class="user" name="signUp_frm" onsubmit="return false;">
                                	<div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="userName" name="userName"
+                                    <input type="text" class="form-control form-control-user" id="user_name" name="user_name"
                                         placeholder="닉네임">
                                 </div>
                                 <div class="form-group row">
                                 	<div class="col-sm-8 mb-3 mb-sm-0">
-                                		<input type="text" class="form-control form-control-user" id="userID" name="userID"
+                                		<input type="text" class="form-control form-control-user" id="user_id" name="user_id"
                                         placeholder="아이디">
                                 	</div>
                                 	<div class="col-sm-4">
@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="form-group">
                                 	<input type="password" class="form-control form-control-user"
-                                            id="userPW" name="userPW" placeholder="비밀번호 (영문자, 숫자 조합으로 8~20자리)">
+                                            id="password" name="password" placeholder="비밀번호 (영문자, 숫자 조합으로 8~20자리)">
                                 </div>
                                 <div class="form-group">
                                 	<input type="password" class="form-control form-control-user"
