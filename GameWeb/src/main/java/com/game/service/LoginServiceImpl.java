@@ -52,15 +52,30 @@ public class LoginServiceImpl implements LoginService {
 			
 			loginVO.setUser_id(userInfo.get("id").toString());
 			loginVO.setLogin_status("login");
-			loginVO.setUser_name(userInfo.get("properties").get("nickname").toString());
+			loginVO.setUser_name(userInfo.get("properties").get("nickname").toString().replace("\"", ""));
 			loginVO.setLogin_type("KAKAO");
 			
-			dao.updateKaKoLogin(loginVO);
+			boolean a = dao.IDCheck(loginVO.getUser_id()) == 0;
+			
+			if(dao.IDCheck(loginVO.getUser_id().toString()) == 0) {
+				dao.insertKaKoLogin(loginVO);
+			}else {
+				dao.updateKaKoLogin(loginVO);
+			}
+			
+			
+			
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return loginVO;
+	}
+
+	@Override
+	public void logout(LoginVO loginVO) throws Exception {
+		dao.updateLogout(loginVO);
+		
 	}
 }

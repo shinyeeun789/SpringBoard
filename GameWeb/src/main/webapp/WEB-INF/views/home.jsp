@@ -126,12 +126,11 @@ $(document).ready(function(){
 
                         <c:choose>
                          	<c:when test="${not empty userInfo}">
-                         		<c:set var="name" value="${sessionScope.userInfo.userName}"/>
-                         		<c:set var="UserName"  value = "${fn:substring(name, 1,fn:length(name)-1)}"/>
+                         		<c:set var="name" value="${sessionScope.userInfo.user_name}"/>
 		                        <li class="nav-item dropdown no-arrow">
 		                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
 		                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${UserName}</span>
+		                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${name}</span>
 		                                <img class="img-profile rounded-circle"
 		                                    src="../resources/img/undraw_profile.svg">
 		                            </a>

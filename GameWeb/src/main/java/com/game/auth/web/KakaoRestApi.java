@@ -85,13 +85,14 @@ public class KakaoRestApi {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public JsonNode getKakaoUserInfo(String autorize_code) throws ClientProtocolException, IOException {
+	public JsonNode getKakaoUserInfo(String accessToken) throws ClientProtocolException, IOException {
 		
 		final String RequestUrl = "https://kapi.kakao.com/v2/user/me";
 		
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);
-		String accessToken = getAccessToken(autorize_code).get("access_token").toString();
+		
+		//String accessToken = getAccessToken(autorize_code).get("access_token").toString();
 		
 		post.addHeader("Authorization", "Bearer " + accessToken);
 		

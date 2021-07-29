@@ -32,18 +32,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
-	<insert id="updateKaKoLogin" parameterType="LoginVO">
+	<insert id="insertKaKoLogin" parameterType="LoginVO">
 		INSERT INTO users(user_id, 
 						  user_name, 
 						  create_date,
 						  login_type, 
 						  login_status, 
 						  login_time)
-		VALUES(#{userID}, #{userName}, now(),#{login_type}, #{login_status}, now())
-		ON DUPLICATE KEY UPDATE login_status = #{login_status},
-								login_time = now()
-
+		VALUES(#{user_id}, #{user_name}, CURDATE(),#{login_type}, #{login_status}, now())
+	
 	</insert>
 	
+	<update id="updateKaKoLogin" parameterType="LoginVO">
+		UPDATE users SET login_status = #{login_status},
+							login_time = now()
+		Where user_id = #{user_id}
+	</update>
 	
+	<update id="updateLogout" parameterType="LoginVO">
+		UPDATE users set login_status = #{login_status}
+		Where user_id = #{user_id}
+	</update>
 </mapper>

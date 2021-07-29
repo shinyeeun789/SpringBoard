@@ -17,4 +17,9 @@ public interface LoginDAO {
 	public int insertNaverUser(LoginVO loginVO) throws Exception;
 
 	public void updateKaKoLogin(LoginVO loginVO) throws Exception;
+	
+	public void insertKaKoLogin(LoginVO loginVO) throws Exception;
+	
+	public void updateLogout(LoginVO loginVO) throws Exception;
+	
 }

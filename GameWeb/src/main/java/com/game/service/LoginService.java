@@ -17,4 +17,6 @@ public interface LoginService {
 	public int insertNaverUser(LoginVO loginVO) throws Exception;
 
 	public LoginVO kakaoLogin(JsonNode userInfo) throws Exception;
+	
+	public void logout(LoginVO loginVO) throws Exception;
 }

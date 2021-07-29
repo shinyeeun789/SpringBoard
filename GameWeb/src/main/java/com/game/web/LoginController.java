@@ -63,10 +63,15 @@ public class LoginController {
    @RequestMapping(value = "/kakaoOauth.do")
    public String getKakaoSignIn(ModelMap model,@RequestParam("code") String code, HttpSession session) throws Exception {
 
-      //JsonNode accessToketn = kakao_rest_api.getAccessToken(code);
 
       KakaoRestApi kakao_rest_api = new KakaoRestApi();
-      JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
+      
+      //JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
+      JsonNode accessToketn = kakao_rest_api.getAccessToken(code);
+      
+      String token = accessToketn.get("access_token").toString();
+      
+      JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(token);
       
       LoginVO loginVO = new LoginVO();
       
@@ -75,6 +80,7 @@ public class LoginController {
          loginVO = service.kakaoLogin(userInfo);
          session.setAttribute("loginCheck ", true);
          session.setAttribute("userInfo", loginVO);
+         session.setAttribute("token", token);
       
       }catch (Exception e) {
          e.printStackTrace();
@@ -159,6 +165,7 @@ public class LoginController {
       return "redirect:/main.do";
    }
    
+   
    @RequestMapping(value="/logout.do", method = RequestMethod.GET)
       public String logout(Model model, HttpSession session) throws Exception {
          //
@@ -172,10 +179,13 @@ public class LoginController {
             JsonNode node = kakao_rest_api.Logout(session.getAttribute("token").toString());
             
             System.out.println("로그아웃 후 반환되는 아이디 :"+ node.get("id"));
+            
+            loginVO.setLogin_status("logout");
+            service.logout(loginVO);
          }
          
          // 세션 무효화
-         session.invalidate();
+         session.setAttribute("userInfo", null);
          
          return "redirect:/main.do";
       }
