@@ -1,7 +1,6 @@
 package com.game.web;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.config.authentication.UserServiceBeanDefinitionParser;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +27,6 @@ import com.game.domain.LoginVO;
 import com.game.domain.NaverLoginBO;
 import com.game.service.LoginService;
 import com.github.scribejava.core.model.OAuth2AccessToken;
-
-
 
 @Controller
 @RequestMapping("/login/*")

@@ -26,91 +26,20 @@
 
 </head>
 
-<script type="text/javascript">
-$(document).ready(function(){
-
-	var userInfo = ${sessionScope.userInfo};
-
-
-});
-</script>
-
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/main.do">
-                <div class="sidebar-brand-icon rotate-n-15">
-                	<i class="fas fa-gamepad"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3"> GAME WEB </div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/main.do">
-                    <i class="fas fa-home"></i>
-                    <span> HOME </span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            
-            <!-- Nav Item - 로그인 -->
-            <li class="nav-item">
-                <a class="nav-link" href="/login/login.do">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span> LOGIN </span></a>
-            </li>
-            
-            <!-- Nav Item - 게임 설명 -->
-            <li class="nav-item">
-                <a class="nav-link" href="#howToPlay">
-                    <i class="fas fa-fw fa-gamepad"></i>
-                    <span> 게임 설명 </span></a>
-            </li>
-
-            <!-- Nav Item - 잡담방-->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span> 잡담방 </span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"> Chat: </h6>
-                        <a class="collapse-item" href="buttons.html"> 글쓰기 </a>
-                        <a class="collapse-item" href="cards.html"> 게시판 </a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-        </ul>
-        <!-- End of Sidebar -->
-
-
+		
+		<jsp:include page="/WEB-INF/views/include/sideBar.jsp"/>	<!-- SideBar include -->
+		
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
 
+<<<<<<< HEAD
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -156,6 +85,9 @@ $(document).ready(function(){
 
                 </nav>
                 <!-- End of Topbar -->
+=======
+                <jsp:include page="/WEB-INF/views/include/topBar.jsp"/>  <!-- TopBar include -->
+>>>>>>> 041f6fc5cbaec3f214e87e1147a9ef5911da1a3e
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -166,19 +98,36 @@ $(document).ready(function(){
                     </div>
                     
                     <!-- Illustrations -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"> INFO </h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center">
-                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                    src="../resources/img/undraw_posting_photo.svg" alt="...">
-                            </div>
-                            <p> 게임에 참여하려면 로그인 해주세요. </p>
-                            <a rel="nofollow" href="/login/login.do"> 로그인하기 &rarr;</a>
-                        </div>
-                    </div>
+                    <c:if test="${empty userInfo}">
+                    	<div class="card shadow mb-4">
+	                        <div class="card-header py-3">
+	                            <h6 class="m-0 font-weight-bold text-primary"> INFO </h6>
+	                        </div>
+	                        <div class="card-body">
+	                            <div class="text-center">
+	                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+	                                    src="../resources/img/undraw_posting_photo.svg" alt="...">
+	                            </div>
+	                            <p> 게임에 참여하려면 로그인 해주세요. </p>
+	                            <a rel="nofollow" href="/login/login.do"> 로그인하기 &rarr;</a>
+	                        </div>
+	                    </div>
+                    </c:if>
+                    <c:if test="${not empty userInfo}">
+                    	<div class="card shadow mb-4">
+	                        <div class="card-header py-3">
+	                            <h6 class="m-0 font-weight-bold text-primary"> GAME </h6>
+	                        </div>
+	                        <div class="card-body">
+	                            <div class="text-center">
+	                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 20rem;"
+	                                    src="../resources/img/online-game.svg" alt="...">
+	                            </div>
+	                            <p> 이제 게임에 참여할 수 있습니다! </p>
+	                            <a rel="nofollow" href="#"> 게임하기 &rarr;</a>
+	                        </div>
+	                    </div>
+                    </c:if>
                     
                     <!-- Illustrations -->
                     <div class="card shadow mb-4" id="howToPlay">

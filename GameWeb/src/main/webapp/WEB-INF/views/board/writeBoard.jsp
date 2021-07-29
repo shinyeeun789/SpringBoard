@@ -10,16 +10,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> GAME WEB</title>
+    <title> GAME WEB </title>
 
-    <!-- Custom fonts for this template-->
+    <!-- Custom fonts for this template -->
     <link href="../../resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+    <!-- Custom styles for this template -->
     <link href="../../resources/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="../../resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -29,36 +32,53 @@
     <div id="wrapper">
 
         <jsp:include page="/WEB-INF/views/include/sideBar.jsp"/>	<!-- SideBar include -->
-
+        
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
 
-                <jsp:include page="/WEB-INF/views/include/topBar.jsp"/> 	<!-- TopBar include -->
+               	<jsp:include page="/WEB-INF/views/include/topBar.jsp"/> 	<!-- TopBar include -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+					<div class="container">
 
-                    <!-- 404 Error Text -->
-                    <div class="text-center">
-                        <div class="error mx-auto" data-text="404">404</div>
-                        <p class="lead text-gray-800 mb-5">Page Not Found</p>
-                        <a href="/main.do">&larr; 홈 화면으로 돌아가기</a>
-                    </div>
-
-                </div>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
+			        <div class="card o-hidden border-0 shadow-lg my-5">
+			            <div class="card-body p-0">
+			                <div class="row">
+			                    <div class="col-lg-12">
+			                        <div class="p-5">
+			                        	<div class="text-center">
+			                                <h1 class="h4 text-gray-900 mb-4"> 새로운 글 작성 </h1>
+			                            </div>
+			                            
+			                            <form method="post" class="user" name="writeBoard_frm" onsubmit="return false;">
+			                               	<div class="form-group">
+			                                    <input type="text" class="form-control form-control-user" id="title" name="title"
+			                                        placeholder="제목">
+			                                </div>
+			                                <div class="form-group">
+			                                	<textarea class="form-control" rows="20" style="resize: none;" id="content" name="content"></textarea>
+			                                </div>
+			                                <button type="submit" class="btn btn-primary btn-user btn-block" id="btnInsertBoard">
+			                                	올리기
+			                                </button>
+			                            </form>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			
+			    </div>
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Game Web 2021</span>
+                        <span>Copyright &copy; GAME WEB 2021</span>
                     </div>
                 </div>
             </footer>
@@ -81,12 +101,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> 로그아웃 </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body"> 정말 로그아웃하시겠습니까? </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="login.html">Logout</a>
@@ -105,6 +125,12 @@
     <!-- Custom scripts for all pages-->
     <script src="../../resources/js/sb-admin-2.min.js"></script>
 
-</body>
+    <!-- Page level plugins -->
+    <script src="../../resources/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
+    <!-- Page level custom scripts -->
+    <script src="../../resources/js/demo/datatables-demo.js"></script>
+
+</body>
 </html>
