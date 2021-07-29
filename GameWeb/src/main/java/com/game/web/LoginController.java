@@ -59,10 +59,7 @@ public class LoginController {
 		
 		   KakaoRestApi kakao_rest_api = new KakaoRestApi();
 		   
-		   //사용자 정보
 			JsonNode userInfo = kakao_rest_api.getKakaoUserInfo(code);
-			//access 토큰
-			JsonNode node = kakao_rest_api.getAccessToken(code);
 			
 			LoginVO loginVO = new LoginVO();
 			
