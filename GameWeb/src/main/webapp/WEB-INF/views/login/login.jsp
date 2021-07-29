@@ -23,9 +23,6 @@
 
     <!-- Custom styles for this template-->
     <link href="../../resources/css/sb-admin-2.min.css" rel="stylesheet">
-
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
-	
 </head>
 
 <script type="text/javascript">
