@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE user_id = #{email}
 	</select>
 	
-	<select id="userNaverLoginPro" parameterType="hashMap" resultType="hashMap">
+	<select id="userNaverLoginPro" parameterType="hashMap" resultType="LoginVO">
 		SELECT user_id, user_name
 		FROM users
 		WHERE user_id = #{email} AND naver_login = #{id}

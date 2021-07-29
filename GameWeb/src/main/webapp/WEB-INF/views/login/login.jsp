@@ -69,24 +69,14 @@
                                         </div>
                                         <a href="index.html" class="btn btn-primary btn-user btn-block"> 로그인 </a>
                                         <hr>
-<<<<<<< HEAD
                                         <div class="text-center">
                                         	<a href="${naverUrl}" class="btn">
 			                                	<img height="40" src="../../resources/img/btnNaverLogin.png"/>
 			                                </a>
-			                                <a href="index.html" class="btn">
+			                                <a href="${kakao_url}" class="btn">
 			                                    <img height="40" src="../../resources/img/btnKakaoLogin.png">
 			                                </a>
                                         </div>
-=======
-                                        <hr>
-		                                <a href="index.html" class="btn btn-light btn-user btn-block">
-		                                    <b>N</b> 네이버 계정으로 로그인
-		                                </a>
-		                                <a href="${kakao_url}" class="btn btn-warning btn-user btn-block">
-		                                    <b>K</b> 카카오 계정으로 로그인
-		                                </a>
->>>>>>> e1d647ceb36e75aa13b17c85ad8146d8c3cc3344
                                     </form>
                                     <hr>
                                     <div class="text-center">

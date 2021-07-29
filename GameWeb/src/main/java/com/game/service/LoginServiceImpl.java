@@ -29,14 +29,13 @@ public class LoginServiceImpl implements LoginService {
 		return dao.insertUser(loginVO);
 	}
 
-<<<<<<< HEAD
 	@Override
 	public Map<String, Object> naverConnectionCheck(Map<String, Object> apiJson) throws Exception {
 		return dao.naverConnectionCheck(apiJson);
 	}
 
 	@Override
-	public Map<String, Object> userNaverLoginPro(Map<String, Object> apiJson) throws Exception {
+	public LoginVO userNaverLoginPro(Map<String, Object> apiJson) throws Exception {
 		return dao.userNaverLoginPro(apiJson);
 	}
 
@@ -44,7 +43,6 @@ public class LoginServiceImpl implements LoginService {
 	public int insertNaverUser(LoginVO loginVO) throws Exception {
 		return dao.insertNaverUser(loginVO);
 	}
-=======
 
 	@Override
 	public LoginVO kakaoLogin(JsonNode userInfo) throws Exception {
@@ -52,9 +50,9 @@ public class LoginServiceImpl implements LoginService {
 		
 		try {
 			
-			loginVO.setUserID(userInfo.get("id").toString());
+			loginVO.setUser_id(userInfo.get("id").toString());
 			loginVO.setLogin_status("login");
-			loginVO.setUserName(userInfo.get("properties").get("nickname").toString());
+			loginVO.setUser_name(userInfo.get("properties").get("nickname").toString());
 			loginVO.setLogin_type("KAKAO");
 			
 			dao.updateKaKoLogin(loginVO);
@@ -65,7 +63,4 @@ public class LoginServiceImpl implements LoginService {
 		
 		return loginVO;
 	}
-	
-	
->>>>>>> e1d647ceb36e75aa13b17c85ad8146d8c3cc3344
 }
