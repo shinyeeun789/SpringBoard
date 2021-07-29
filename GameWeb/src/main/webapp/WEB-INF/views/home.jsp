@@ -28,9 +28,9 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+
 	var userInfo = ${sessionScope.userInfo};
-	
-	var userName = userInfo.get("userName");
+
 
 });
 </script>
@@ -125,12 +125,13 @@ $(document).ready(function(){
                         <!-- Nav Item - User Information -->
 
                         <c:choose>
-                         	<c:when test="${not empty userName}">
-                      
+                         	<c:when test="${not empty userInfo}">
+                         		<c:set var="name" value="${sessionScope.userInfo.userName}"/>
+                         		<c:set var="UserName"  value = "${fn:substring(name, 1,fn:length(name)-1)}"/>
 		                        <li class="nav-item dropdown no-arrow">
 		                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
 		                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${userName}</span>
+		                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${UserName}</span>
 		                                <img class="img-profile rounded-circle"
 		                                    src="../resources/img/undraw_profile.svg">
 		                            </a>
@@ -236,7 +237,7 @@ $(document).ready(function(){
                 <div class="modal-body"> 정말 로그아웃하시겠습니까? </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/login/logout.do">Logout</a>
                 </div>
             </div>
         </div>
