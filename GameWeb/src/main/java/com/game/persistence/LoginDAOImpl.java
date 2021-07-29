@@ -27,6 +27,7 @@ public class LoginDAOImpl implements LoginDAO {
 		return session.insert(namespace+".insertUser", loginVO);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public Map<String, Object> naverConnectionCheck(Map<String, Object> apiJson) {
 		return session.selectOne(namespace+".naverConnectionCheck", apiJson);
@@ -42,5 +43,12 @@ public class LoginDAOImpl implements LoginDAO {
 		
 		System.out.println(loginVO.getNaver_login().length());
 		return session.insert(namespace+".insertNaverUser", loginVO);
+=======
+
+	@Override
+	public void updateKaKoLogin(LoginVO loginVO) throws Exception {
+		session.update(namespace+".updateKaKoLogin", loginVO);
+		
+>>>>>>> e1d647ceb36e75aa13b17c85ad8146d8c3cc3344
 	}
 }

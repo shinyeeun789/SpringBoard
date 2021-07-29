@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KakaoRestApi {
 	private final static String K_CLIENT_ID = "db1cd9e8343b76d2a21deae2ce17abbd";
-	private final static String K_REDIRECT_URI="http://localhost:8081/kakaoOauth.do";
+	private final static String K_REDIRECT_URI="http://localhost:8081/login/kakaoOauth.do";
 	
 	/** authorization Url get
 	 * 
@@ -30,8 +30,8 @@ public class KakaoRestApi {
 	 */
 	public String getAuthorizationUrl(HttpSession session) {
 		
-		String kakoUrl = "https://kauth.kako.com/oauth/authorize?"
-				+"cliendt_id=" + K_CLIENT_ID + "&redirect_uri=" 
+		String kakoUrl = "https://kauth.kakao.com/oauth/authorize?"
+				+"client_id=" + K_CLIENT_ID + "&redirect_uri=" 
 				+ K_REDIRECT_URI + "&response_type=code";
 		return kakoUrl;
 	}
@@ -44,14 +44,14 @@ public class KakaoRestApi {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public String getAccessToken(String autorize_code) throws ClientProtocolException, IOException {
+	public JsonNode getAccessToken(String autorize_code) throws ClientProtocolException, IOException {
 		
 		final String RequestUrl = "https://kauth.kakao.com/oauth/token";
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", K_CLIENT_ID)); //REST API KEY
 		postParams.add(new BasicNameValuePair("redirect_uri", K_REDIRECT_URI)); // redrect uri
-		postParams.add(new BasicNameValuePair("code", autorize_code)); // 로그인 과정중 얻는 code 값
+		postParams.add(new BasicNameValuePair("code", autorize_code)); 
 		
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);
@@ -62,7 +62,6 @@ public class KakaoRestApi {
 			final HttpResponse response = client.execute(post);
 			final int reposeCode =response.getStatusLine().getStatusCode();
 			
-			//JSON 형태 반환값 처리
 			
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
@@ -73,16 +72,26 @@ public class KakaoRestApi {
 			e.printStackTrace();
 		}
 		
-		return returnNode.get("access_token").toString();
+		System.out.println(returnNode);
+		
+		return returnNode;
 	}
 	
+	
+	/** 카카오 사용자 정보 가져오기
+	 * 
+	 * @param autorize_code
+	 * @return
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public JsonNode getKakaoUserInfo(String autorize_code) throws ClientProtocolException, IOException {
 		
 		final String RequestUrl = "https://kapi.kakao.com/v2/user/me";
 		
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);
-		String accessToken = getAccessToken(autorize_code);
+		String accessToken = getAccessToken(autorize_code).get("access_token").toString();
 		
 		post.addHeader("Authorization", "Bearer " + accessToken);
 		
@@ -95,7 +104,7 @@ public class KakaoRestApi {
 			System.out.println("\nSending 'POST request to URL : " + RequestUrl);
 			System.out.println("Response Code : " + responseCode);
 			
-			//Json 형태 반환값 처리
+			
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
 			
@@ -108,6 +117,37 @@ public class KakaoRestApi {
 		}
 		
 		
+		System.out.println(returnNode);
+		return returnNode;
+	}
+	
+	
+	
+	/** 카카오 계정 로그아웃
+	 * 
+	 * @param autorize_code
+	 * @return
+	 */
+	public JsonNode Logout(String autorize_code) {
+		
+		final String RequestUrl = "https://kapi.kakao.com/v1/user/logout";
+		final HttpClient client = HttpClientBuilder.create().build();
+		final HttpPost post = new HttpPost(RequestUrl);
+		post.addHeader("Authorization", "Bearer " + autorize_code);
+		JsonNode returnNode = null;
+		
+		try {
+			final HttpResponse response = client.execute(post);
+			ObjectMapper mapper = new ObjectMapper();
+			returnNode = mapper.readTree(response.getEntity().getContent());
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return returnNode;
 	}
