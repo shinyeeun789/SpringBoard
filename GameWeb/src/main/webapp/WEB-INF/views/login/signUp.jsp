@@ -34,6 +34,11 @@
 			var frm = document.signUp_frm;
 			var userID = frm.user_id;
 			
+			if(userID.value == "" || userID.value == null) {
+				$("#IdMSG").css("font-size", "12px").html("아이디 입력 후 아이디 중복을 확인해주세요.");
+				return;
+			}
+			
 			$.ajax({
 				type: 'POST',
 				url : '/login/idCheck.do',
@@ -41,7 +46,7 @@
 				dataType: 'json',
 				success:function(data) {
 					if(data.result == true) {
-						$("#IdMSG").css("font-size", "12px").html("사용할 수 있는 아이디입니다.");
+						$("#IdMSG").css("font-size", "12px").html("사용 가능한 아이디입니다.");
 					} else {
 						$("#IdMSG").css("font-size", "12px").html("이미 사용 중인 아이디입니다.");
 					}
@@ -71,8 +76,8 @@
 			} else if(userPW.value != userRepeatPW.value) {
 				$("#spanMSG").css("font-size", "12px").html("비밀번호와 비밀번호 확인이 일치하지 않습니다");
 				userPW.focus();
-			} else if($("#IdMSG").text() != '사용할 수 있는 아이디입니다.') {
-				$("#spanMSG").css("font-size", "12px").html("아이디 중복 확인을 해주세요.");
+			} else if($("#IdMSG").text() != '사용 가능한 아이디입니다.') {
+				$("#spanMSG").css("font-size", "12px").html("아이디 중복을 확인해주세요.");
 			} else if(checkPassword(userPW)) {
 				frm.action = '/login/signUp.do';
 				frm.submit();
