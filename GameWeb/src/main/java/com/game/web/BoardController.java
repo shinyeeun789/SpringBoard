@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BoardController {
 
-	@RequestMapping(value = "/createBoard.do", method = RequestMethod.GET)
-	public String createBoard(Model model, HttpSession requset) {
+	@RequestMapping(value = "/readBoard.do", method = RequestMethod.GET)
+	public String readBoard(Model model, HttpSession requset) {
 		
-		return "/board/createBoard";
+		return "/board/readBoard";
 	}
 	
-	@RequestMapping(value="/writeBoard.do")
-	public String writeBoard(Model model, HttpSession request) {
+	@RequestMapping(value="/createBoard.do")
+	public String createBoard(Model model, HttpSession request) {
 		
-		return "/board/writeBoard";
+		return "/board/createBoard";
 	}
 }
