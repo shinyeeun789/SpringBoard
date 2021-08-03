@@ -27,8 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertNaverUser" parameterType="LoginVO">
-		INSERT INTO users(user_id, user_name, naver_login, create_date)
-		VALUES(#{user_id}, #{user_name}, #{naver_login}, now());
+		INSERT INTO users(user_id, user_name, naver_login, login_type, create_date)
+		VALUES(#{user_id}, #{user_name}, #{naver_login}, 'NAVER', now());
 	</insert>
 	
 	

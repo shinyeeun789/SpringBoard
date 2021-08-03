@@ -129,8 +129,8 @@ public class LoginController {
    public String userName(HttpServletRequest request, LoginVO loginVO, HttpSession session) throws Exception {
       
       service.insertNaverUser(loginVO);
-
-      return "redirect:/main.do";
+      
+      return "redirect:/login/login.do";
    }
    
    // 네이버 로그인 callback 컨트롤러

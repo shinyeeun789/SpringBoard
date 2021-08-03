@@ -28,6 +28,10 @@
 			$("#btnIdCheck").click(userIDCheck);
 			$("#btnSignUp").click(userSignUp);
 			$("#userName").focus();
+			
+			$("#user_id").on("propertychange change keyup paste input", function(){
+				$("#IdMSG").css("font-size", "12px").html("");
+			});
 		});
 		
 		userIDCheck = function() {

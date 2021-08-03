@@ -1,0 +1,27 @@
+[users 테이블]
+CREATE TABLE `USERS` (
+  `user_num` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(50) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `password` varchar(60) DEFAULT NULL,
+  `login_time` timestamp DEFAULT NULL,
+  `login_type` varchar(50) DEFAULT NULL,
+  `login_status` varchar(50) DEFAULT NULL,
+  `create_date` date DEFAULT NULL,
+  `update_date` date DEFAULT NULL,
+  `naver_login` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`user_num`,`user_id`),
+  INDEX(`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+[Board 테이블]
+CREATE TABLE `BOARD` (
+  `board_num` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(50) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `content` varchar(1000) NOT NULL,
+  `board_time` timestamp NOT NULL,
+  `update_time` timestamp DEFAULT NULL,
+  PRIMARY KEY (`board_num`),
+  FOREIGN KEY (`user_id`) REFERENCES `USERS` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

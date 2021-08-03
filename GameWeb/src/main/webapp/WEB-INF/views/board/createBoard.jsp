@@ -24,6 +24,23 @@
 
     <!-- Custom styles for this page -->
     <link href="../../resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+	
+	<script type=text/javascript>
+		$(function() {
+			$('#content').keyup(function(e) {
+				var content = $(this).val();
+				$('#counter').val("(" + content.length + "자/1000자)");
+				
+				if(content.length > 1000) {
+					alert("최대 1000자까지 입력 가능합니다.");
+					$(this).val(content.substring(0,1000));
+					$('#counter').html("(1000자/1000자)");
+				}
+			});
+		});
+	</script>
 </head>
 
 <body id="page-top">
@@ -40,6 +57,13 @@
             <div id="content">
 
                	<jsp:include page="/WEB-INF/views/include/topBar.jsp"/> 	<!-- TopBar include -->
+               	
+            	<c:if test="${empty userInfo}">
+            		<script type="text/javascript">
+            			alert('로그인 후 접근 가능한 메뉴입니다. 로그인 또는 회원가입 해주세요:)');
+            			window.location.href = '/login/login.do';
+            		</script>
+            	</c:if>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -54,13 +78,16 @@
 			                                <h1 class="h4 text-gray-900 mb-4"> 새로운 글 작성 </h1>
 			                            </div>
 			                            
-			                            <form method="post" class="user" name="writeBoard_frm" onsubmit="return false;">
+			                            <form method="post" class="createBoard" name="writeBoard_frm" onsubmit="return false;">
+			                            	<input type="hidden" id="user_id" name="user_id" value="${userInfo.getUser_id()}">
 			                               	<div class="form-group">
 			                                    <input type="text" class="form-control form-control-user" id="title" name="title"
-			                                        placeholder="제목">
+			                                        placeholder="제목을 50자 이내로 입력해주세요 :)">
 			                                </div>
 			                                <div class="form-group">
-			                                	<textarea class="form-control" rows="20" style="resize: none;" id="content" name="content"></textarea>
+			                                	<textarea class="form-control" rows="20" style="resize: none;" id="content" name="content"
+			                                	placeholder="내용을 1000자 이내로 입력해주세요 :)"></textarea>
+			                                	<span style="color:#aaa;" id="counter"> (0자/1000자) </span>
 			                                </div>
 			                                <button type="submit" class="btn btn-primary btn-user btn-block" id="btnInsertBoard">
 			                                	올리기

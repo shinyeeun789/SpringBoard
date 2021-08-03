@@ -9,7 +9,9 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-	$(document).ready(function(){ var userInfo = ${sessionScope.userInfo}; });
+	$(document).ready(function(){ 
+		var userInfo = ${sessionScope.userInfo};
+	});
 </script>
 </head>
 	<body>

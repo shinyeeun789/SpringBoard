@@ -39,8 +39,7 @@ public class LoginDAOImpl implements LoginDAO {
 
 	@Override
 	public int insertNaverUser(LoginVO loginVO) throws Exception {
-		
-		System.out.println(loginVO.getNaver_login().length());
+
 		return session.insert(namespace+".insertNaverUser", loginVO);
 	}
 
