@@ -1,5 +1,6 @@
 package com.game.web;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -8,11 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.game.domain.BoardVO;
+import com.game.service.BoardService;
 
 @RequestMapping("/board/*")
 
 @Controller
 public class BoardController {
+
+	@Inject
+	private BoardService boardService;
 
 	@RequestMapping(value = "/readBoard.do", method = RequestMethod.GET)
 	public String readBoard(Model model, HttpSession requset) {
@@ -27,9 +32,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/createBoard.do", method = RequestMethod.POST)
-	public String createBoardPOST(Model model, HttpSession request, BoardVO boardVO) {
-		System.out.println("createBoardPOST");
+	public String createBoardPOST(HttpSession request, BoardVO boardVO, Model model) throws Exception {
 		
-		return "/board/readBoard.do";
+		int result = boardService.insertBoard(boardVO);
+		
+		return "redirect:/board/readBoard.do";
 	}
 }

@@ -26,20 +26,35 @@
     <link href="../../resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
-	
-	<script type=text/javascript>
-		$(function() {
-			$('#content').keyup(function(e) {
-				var content = $(this).val();
-				$('#counter').val("(" + content.length + "자/1000자)");
-				
-				if(content.length > 1000) {
-					alert("최대 1000자까지 입력 가능합니다.");
-					$(this).val(content.substring(0,1000));
-					$('#counter').html("(1000자/1000자)");
-				}
-			});
-		});
+    	    
+    <script type=text/javascript>
+    	$(document).ready(function() {
+    		$("#btnInsertBoard").click(insertBoard);
+    	});
+    	
+    	insertBoard = function() {
+    		var frm = document.writeBoard_frm;
+    	 	var title = frm.title;
+    	 	var content = frm.content;
+    	 	
+    	 	if(title.value.length < 1 || content.value.length < 1) {
+    	 		alert('입력되지 않은 항목이 있습니다.');
+    	 		return;
+    	 	} else {
+    	 		frm.action = '/board/createBoard.do';
+    	 		frm.submit();
+    	 	}
+    	}
+    
+		function fnChkText(obj) {
+			var str = obj.value;
+			$("#counter").html("(" + str.length + "자/1000자)");
+			
+			if(str.length > 1000) {
+				obj.value = str.substr(0,1000);
+				$("#counter").html("(1000자/1000자)");
+			}
+		}
 	</script>
 </head>
 
@@ -86,7 +101,7 @@
 			                                </div>
 			                                <div class="form-group">
 			                                	<textarea class="form-control" rows="20" style="resize: none;" id="content" name="content"
-			                                	placeholder="내용을 1000자 이내로 입력해주세요 :)"></textarea>
+			                                	placeholder="내용을 1000자 이내로 입력해주세요 :)" onKeyUp="javascript:fnChkText(this)"></textarea>
 			                                	<span style="color:#aaa;" id="counter"> (0자/1000자) </span>
 			                                </div>
 			                                <button type="submit" class="btn btn-primary btn-user btn-block" id="btnInsertBoard">
@@ -98,7 +113,6 @@
 			                </div>
 			            </div>
 			        </div>
-			
 			    </div>
 
             <!-- Footer -->

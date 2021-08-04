@@ -2,7 +2,7 @@ package com.game.domain;
 
 public class BoardVO {
 	private int board_num;
-	private int user_num;
+	private String user_id;
 	private String title;
 	private String content;
 	private String board_time;
@@ -14,11 +14,11 @@ public class BoardVO {
 	public void setBoard_num(int board_num) {
 		this.board_num = board_num;
 	}
-	public int getUser_num() {
-		return user_num;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setUser_num(int user_num) {
-		this.user_num = user_num;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public String getTitle() {
 		return title;
