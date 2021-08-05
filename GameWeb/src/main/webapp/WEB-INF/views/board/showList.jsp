@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +25,6 @@
 
     <!-- Custom styles for this page -->
     <link href="../../resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
 </head>
 
 <body id="page-top">
@@ -42,51 +41,56 @@
             <div id="content">
 
                	<jsp:include page="/WEB-INF/views/include/topBar.jsp"/> 	<!-- TopBar include -->
-               	
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-					<div class="container">
 
-			        <div class="card o-hidden border-0 shadow-lg my-5">
-			            <div class="card-body p-0">
-			                <div class="row">
-			                    <div class="col-lg-12">
-			                        <div class="p-5">
-			                            <table class="table table-striped" width="100%" cellspacing="0">
-			                            	<thead>
-			                            		<tr class="text-center">
-		                                            <th class="table-primary"> 제목 </th>
-		                                            <td colspan="3"> ${board.title} </td>
-		                                        </tr>
-	                                    		<tr class="text-center">
-		                                            <th class="table-primary"> 작성자 </th>
-		                                            <td colspan="3"> ${board.user_name} </td>
-		                                        </tr>
-		                                        <tr class="text-center">
-		                                            <th class="table-primary"> 작성시간 </th>
-		                                            <td> ${board.board_time} </td>
-		                                            <th class="table-primary"> 조회수 </th>
-		                                            <td> ${board.views} </td>
-		                                        </tr>
-		                                        <tr class="text-center">
-		                                        	<th colspan="4" class="table-primary"> 내용 </th>
-		                                        </tr>
-			                            	</thead>
-		                                    <tbody>
-			                                    <td colspan="4"> ${board.content} </td>
-		                                    </tbody>
-		                                </table>
-		                                
-		                                <!-- 목록 버튼 -->
-		                                <a href="/board/showList.do" class="btn btn-primary btn-circle">
-	                                        <i class="fas fa-list"></i>
-	                                    </a>
-			                        </div>
-			                    </div>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800"> 잡담방 </h1>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary"> 게시판 </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th> 번호 </th>
+                                            <th> 제목 </th>
+                                            <th> 작성자 </th>
+                                            <th> 작성시간 </th>
+                                            <th> 조회수 </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<% int number = 0; %>
+                                    	<c:forEach items="${list}" var="boardVO">
+                                    		<% number++; %>
+                                    		<tr onClick="location.href='/board/readBoard.do?board_num=${boardVO.board_num}'" 
+                                    				onMouseOver = "window.status='/board/readBoard.do?board_num=${boardVO.board_num}'" 
+                                    				onMouseOut = "window.status=''"
+                                    				style="cursor:pointer;">
+	                                            <td class="text-center"> <%=number%> </td>
+	                                            <td> ${boardVO.title} </td>
+	                                            <td class="text-center"> ${boardVO.user_name} </td>
+	                                            <td class="text-center"> ${boardVO.board_time} </td>
+	                                            <td class="text-center"> ${boardVO.views} </td>
+	                                        </tr>
+                                    	</c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">

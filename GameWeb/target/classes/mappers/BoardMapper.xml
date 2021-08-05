@@ -3,8 +3,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.game.mapper.boardMapper">
+	
 	<insert id="insertBoard" parameterType="BoardVO">
 		INSERT INTO board(user_id, title, content, board_time)
-		VALUES(#{user_id}, #{title}, #{content}, now());
+		VALUES(#{user_id}, #{title}, #{content}, now())
 	</insert>
+	
+	<select id="selectBoards" resultType="BoardVO">
+		SELECT board_num, 
+			   user_name, 
+		       title,
+		       IF(DATEDIFF(IFNULL(update_time, board_time), NOW()) > 0, 
+					CONCAT(ABS(DATEDIFF(IFNULL(update_time, board_time), NOW())) + 1, '일 전'),
+		            TIME_FORMAT(TIMEDIFF(NOW(), IFNULL(update_time, board_time)), '%H시간 %i분 전')) AS board_time,
+		       views
+		FROM board join users using(user_id)
+		ORDER BY board_time
+	</select>
+	
+	<select id="selectBoard" parameterType="int" resultType="BoardVO">
+		SELECT user_name, 
+			   title,
+			   content, 
+			   DATE_FORMAT(IFNULL(update_time, board_time), '%Y년 %m월 %d일  %I시 %i분 %S초') AS board_time,
+			   views
+		FROM board join users using(user_id)
+		WHERE board_num = #{value}
+	</select>
+	
+	<update id="addViews" parameterType="int">
+		UPDATE board
+		SET views = views + 1
+		WHERE board_num = #{value}
+	</update>
 </mapper>

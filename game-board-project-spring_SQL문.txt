@@ -19,9 +19,10 @@ CREATE TABLE `BOARD` (
   `board_num` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
-  `content` varchar(1000) NOT NULL,
+  `content` varchar(2500) NOT NULL,
   `board_time` timestamp NOT NULL,
   `update_time` timestamp DEFAULT NULL,
+  `views` int(10) DEFAULT 0,
   PRIMARY KEY (`board_num`),
   FOREIGN KEY (`user_id`) REFERENCES `USERS` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

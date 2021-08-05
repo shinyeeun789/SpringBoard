@@ -3,10 +3,12 @@ package com.game.domain;
 public class BoardVO {
 	private int board_num;
 	private String user_id;
+	private String user_name;
 	private String title;
 	private String content;
 	private String board_time;
 	private String update_time;
+	private int views;
 	
 	public int getBoard_num() {
 		return board_num;
@@ -19,6 +21,12 @@ public class BoardVO {
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 	public String getTitle() {
 		return title;
@@ -43,5 +51,11 @@ public class BoardVO {
 	}
 	public void setUpdate_time(String update_time) {
 		this.update_time = update_time;
+	}
+	public int getViews() {
+		return views;
+	}
+	public void setViews(int views) {
+		this.views = views;
 	}
 }
